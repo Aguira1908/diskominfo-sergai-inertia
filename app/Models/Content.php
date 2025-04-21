@@ -29,7 +29,7 @@ class Content extends Model
 
     public function submenu(): BelongsTo
     {
-        return $this->belongsTo(Submenu::class);
+        return $this->belongsTo(Submenu::class, 'sub_menu_id');
     }
 
 
