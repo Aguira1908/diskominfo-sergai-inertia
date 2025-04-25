@@ -2,6 +2,7 @@ import { Link } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { ChevronDown, CircleX, Menu } from "lucide-react";
 import Information from "../../../public/images/informasi.svg";
+import axios from "axios";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,20 @@ const Header = () => {
         return () => setIsVisible(false);
     }, [isOpen]);
 
+    useEffect(() => {
+        const fetchMenu = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:8000/api/menu"
+                );
+                console.log(response);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchMenu();
+    }, []);
     return (
         <header className="pembungkus-header  flex items-center w-screen h-16 fixed top-0 z-20 bg-white sm:h-16 lg:h-20">
             <div className="container mx-auto px-6 2xl:px-0 xl:max-w-7xl">
