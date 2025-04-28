@@ -1,0 +1,36 @@
+.curved {
+    -webkit-text-size-adjust: 100%;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    tab-size: 4;
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    color: rgba(2, 43, 85, var(--tw-text-opacity));
+    font-family: Lato, sans-serif;
+    --text-scale-factor: 1;
+    --swiper-theme-color: #007aff;
+    --swiper-navigation-size: 44px;
+    line-height: inherit;
+    border: 0 solid #eee;
+    box-sizing: border-box;
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-scroll-snap-strictness: proximity;
+    background-color: #fafafa;
+    -webkit-border-radius: 200vh 200vh 0 0/20vh 20vh 0 0;
+    height: 100px;
+    margin-left: -10%;
+    margin-right: 10%;
+    margin-top: -42px;
+    overflow: hidden;
+    position: relative;
+    width: 120%;
+    z-index: 10;
+}
