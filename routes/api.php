@@ -3,8 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\NewsCategoryController;
 use App\Http\Controllers\Api\ConfigurationController;
 use App\Http\Controllers\APi\FeaturedProgramController;
 
@@ -21,3 +23,9 @@ Route::get('/banners', [BannerController::class, 'index']);
 Route::get('/featured-programs', [FeaturedProgramController::class, 'index']);
 
 Route::get('/events', [EventController::class, 'index']);
+
+Route::get('/news-category', [NewsCategoryController::class, 'index']);
+
+// routes/api.php
+Route::get('/news', [NewsController::class, 'index']);
+Route::get('/news/{slug}', [NewsController::class, 'show']);
