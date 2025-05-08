@@ -11,5 +11,12 @@ class Configurations extends Model
     protected $casts = [
         'background' => 'array',
     ];
+    protected $appends = ['background_urls'];
 
+    public function getBackgroundUrlsAttribute()
+    {
+        return collect($this->background)->map(function ($file) {
+            return url('storage/' . $file);
+        });
+    }
 }
