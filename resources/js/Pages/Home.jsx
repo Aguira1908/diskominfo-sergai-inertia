@@ -28,137 +28,57 @@ import {
 import { Link } from "@inertiajs/react";
 import axios from "axios";
 
-import Image1 from "../../../public/storage/news-images/01JRX6J0ZZGQXCPBCD7JJYK4PQ.webp";
-import Image2 from "../../../public/storage/news-images/01JRX6M0PXENEVHT9SPWMH1YC6.jpeg";
-import Image3 from "../../../public/storage/news-images/01JRZHKAH1DXYN9ME9GK0PGKMX.jpg";
+// import Image1 from "../../../public/storage/news-images/01JRX6J0ZZGQXCPBCD7JJYK4PQ.webp";
+// import Image2 from "../../../public/storage/news-images/01JRX6M0PXENEVHT9SPWMH1YC6.jpeg";
+// import Image3 from "../../../public/storage/news-images/01JRZHKAH1DXYN9ME9GK0PGKMX.jpg";
 
-import Slide1 from "../../../public/storage/slideshow/slide1.webp";
-import Slide2 from "../../../public/storage/slideshow/slide2.webp";
-import Slide3 from "../../../public/storage/slideshow/slide3.webp";
-import Slide4 from "../../../public/storage/slideshow/slide4.webp";
+// import Slide1 from "../../../public/storage/slideshow/slide1.webp";
+// import Slide2 from "../../../public/storage/slideshow/slide2.webp";
+// import Slide3 from "../../../public/storage/slideshow/slide3.webp";
+// import Slide4 from "../../../public/storage/slideshow/slide4.webp";
 
 import "../../css/Home.css";
 import Banner from "../Modules/Banner";
+import HeroSection from "../Section/HeroSection";
+import NewsSection from "../Section/NewsSection";
+import BannerSection from "../Section/BannerSection";
 
 const Home = () => {
     const swiperRef = useRef(null);
     const [categoriesWithNews, setCategoriesWithNews] = useState(null);
 
     // Data dummy berita
-    const newsData = [
-        {
-            id: 1,
-            title: "Teknologi AI Terbaru Ubah Cara Kerja Perusahaan",
-            image: Image1,
-            penulis: "Ahmad Fauzi",
-            tanggal: "15 April 2024",
-            category: "Pemerintah",
-        },
-        {
-            id: 2,
-            title: "Pemerintah Umumkan Stimulus Ekonomi untuk UMKM",
-            image: Image2,
-            penulis: "Rina Wijaya",
-            tanggal: "10 April 2024",
-            category: "Pemerintah",
-        },
-        {
-            id: 3,
-            title: "Prediksi Harga Emas Naik 20% di Kuartal Kedua",
-            image: Image3,
-            penulis: "Budi Santoso",
-            tanggal: "5 April 2024",
-            category: "Pemerintah",
-        },
-    ];
+    // const newsData = [
+    //     {
+    //         id: 1,
+    //         title: "Teknologi AI Terbaru Ubah Cara Kerja Perusahaan",
+    //         image: Image1,
+    //         penulis: "Ahmad Fauzi",
+    //         tanggal: "15 April 2024",
+    //         category: "Pemerintah",
+    //     },
+    //     {
+    //         id: 2,
+    //         title: "Pemerintah Umumkan Stimulus Ekonomi untuk UMKM",
+    //         image: Image2,
+    //         penulis: "Rina Wijaya",
+    //         tanggal: "10 April 2024",
+    //         category: "Pemerintah",
+    //     },
+    //     {
+    //         id: 3,
+    //         title: "Prediksi Harga Emas Naik 20% di Kuartal Kedua",
+    //         image: Image3,
+    //         penulis: "Budi Santoso",
+    //         tanggal: "5 April 2024",
+    //         category: "Pemerintah",
+    //     },
+    // ];
     return (
         <main className="overflow-hidden">
             <div className="relative">
                 <div className="w-full">
-                    <div className="h-[700px] bg-gray-800 ">
-                        {/* Swiper */}
-                        <Swiper
-                            onSwiper={(swiper) => (swiperRef.current = swiper)}
-                            autoplay={{
-                                delay: 5000,
-                                disableOnInteraction: false,
-                            }}
-                            speed={1500}
-                            loop={true}
-                            allowTouchMove={false}
-                            effect={"fade"}
-                            modules={[EffectFade, Autoplay]}
-                            className="mySwiper relative w-full h-full overflow-hidden"
-                        >
-                            {newsData?.map((news, index) => {
-                                return (
-                                    <SwiperSlide key={index}>
-                                        <div>
-                                            <img
-                                                src={news.image}
-                                                alt="image"
-                                                className="w-full h-full absolute top-0 object-cover object-center"
-                                                width={1920}
-                                                height={740}
-                                            />
-                                            <div
-                                                className="w-full h-full absolute top-0"
-                                                style={{
-                                                    background:
-                                                        "radial-gradient(100% 820.78% at 0% 0%, rgba(0, 60, 150, 0.675) 0%, rgba(4, 36, 84, 0.5625) 61.62%)",
-                                                }}
-                                            ></div>
-                                        </div>
-                                        {/* Carousel Image */}
-                                    </SwiperSlide>
-                                );
-                            })}
-                        </Swiper>
-                        <section className=" font-[times-new-roman] flex justify-center items-center w-full absolute top-10 z-10 min-h-[740px]">
-                            <div className="container mx-auto px-6 2xl:px-0 xl:max-w-7xl">
-                                <div
-                                    className="background_section_1 flex flex-col items-center -mt-20 bg-no-repeat py-3  bg-contain"
-                                    style={{
-                                        backgroundImage: `url()`,
-                                    }}
-                                >
-                                    <h1 className="lg:pt-5 text-white font-lora uppercase leading-normal text-center tracking-tight text-2xl md:text-4xl lg:text-[42px] mb-2 md:mb-3 lg:mb-2">
-                                        Diskominfo Sergai
-                                    </h1>
-                                    <h2 className="max-w-[500px] md:max-w-[800px] text-white font-lora font-bold uppercase text-center tracking-tight text-xl leading-normal md:text-3xl md:leading-relaxed lg:text-4xl lg:leading-relaxed mb-4 md:mb-6 lg:mb-12">
-                                        Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Nulla, beatae?
-                                    </h2>
-                                    <p className="text-gray-300  font-medium leading-relaxed text-center max-w-xl lg:max-w-2xl mb-4 md:mb-7 text-sm md:text-base">
-                                        Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Ratione dolore facere
-                                        dignissimos delectus fugiat a quae
-                                        laudantium voluptatem praesentium
-                                        possimus?
-                                    </p>
-
-                                    <ul className="flex w-full md:w-[fit-content] max-w-xl mt-4 justify-between md:justify-center gap-6 md:mt-0 md:absolute md:h-[740px] md:top-0 md:right-6 md:flex-col">
-                                        <a
-                                            href="#"
-                                            className="bg-gray-200/10 rounded-xl flex justify-center items-center p-3"
-                                        >
-                                            <div
-                                                aria-hidden="true"
-                                                className=" flex justify-center items-center text-white group-hover:opacity-100 md:opacity-40"
-                                                style={{
-                                                    width: "18px",
-                                                    height: "18px",
-                                                }}
-                                            >
-                                                <Facebook className="opacity-50 " />
-                                            </div>
-                                        </a>
-                                    </ul>
-                                </div>
-                            </div>
-                        </section>
-                        <div className="curved"></div>
-                    </div>
+                    <HeroSection />
                 </div>
             </div>
 
@@ -194,159 +114,7 @@ const Home = () => {
                             {/* Berita */}
                             <div className="bg-sky-300w-full grid grid-cols-1 gap-8 md:grid-rows-1 lg:grid-cols-[1fr_330px]">
                                 <div className=" carousel w-full h-[536px] overflow-hidden rounded-lg">
-                                    <div className="carousel w-full h-full overflow-hidden relative group">
-                                        {/* Image Section Start*/}
-                                        {/* Banner Berita */}
-                                        <Swiper
-                                            onSwiper={(swiper) =>
-                                                (swiperRef.current = swiper)
-                                            }
-                                            autoplay={{
-                                                delay: 5000,
-                                                disableOnInteraction: false,
-                                            }}
-                                            speed={1500}
-                                            loop={true}
-                                            allowTouchMove={false}
-                                            effect={"fade"}
-                                            modules={[EffectFade, Autoplay]}
-                                            className="mySwiper relative w-full h-full overflow-hidden"
-                                        >
-                                            {newsData
-                                                .slice(0, 5)
-                                                .map((News, index) => {
-                                                    console.log(News);
-                                                    return (
-                                                        <SwiperSlide
-                                                            key={index}
-                                                        >
-                                                            <div className="w-full h-full group">
-                                                                <img
-                                                                    src={
-                                                                        News.image
-                                                                    }
-                                                                    alt=""
-                                                                    className="w-full h-full absolute top-0 object-cover object-center"
-                                                                />
-                                                                <div className=" visible inline-block h-[67%] md:h-[50%] absolute bottom-0 w-full bg-black/40 transition duration-500 ease-in-out group-hover:bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg px-8 py-6 text-white">
-                                                                    <div className="flex flex-col h-full">
-                                                                        <div className="flex-grow flex flex-col h-auto justify-between">
-                                                                            <div>
-                                                                                <p className="font-roboto text-sm uppercase leading-relaxed tracking-wider opacity-80 mb-1">
-                                                                                    {
-                                                                                        News.category
-                                                                                    }
-                                                                                </p>
-                                                                                <Link
-                                                                                    to={
-                                                                                        "#"
-                                                                                    }
-                                                                                    className=""
-                                                                                >
-                                                                                    <h2 className="line-clamp-3 md:line-clamp-2 font-intro font-extrabold text-xl md:text-2xl leading-9 md:leading-10 max-h-[108px] md:max-h-[90px] mb-3">
-                                                                                        {
-                                                                                            News.title
-                                                                                        }
-                                                                                    </h2>
-                                                                                </Link>
-                                                                            </div>
-                                                                            <div className="flex mb-5 flex-col md:flex-row gap-2 opacity-60 text-xs md:divide-x divide-white">
-                                                                                <p className="flex items-center gap-2 md:pr-2">
-                                                                                    <img
-                                                                                        src={
-                                                                                            Calendar
-                                                                                        }
-                                                                                        width="16px"
-                                                                                        height="16px"
-                                                                                        aria-hidden="true"
-                                                                                    />
-                                                                                    <span>
-                                                                                        {new Date(
-                                                                                            News.tanggal
-                                                                                        ).toLocaleDateString(
-                                                                                            "id-ID",
-                                                                                            {
-                                                                                                day: "numeric",
-                                                                                                month: "long",
-                                                                                                year: "numeric",
-                                                                                            }
-                                                                                        )}
-                                                                                    </span>
-                                                                                </p>
-                                                                                <p className="md:pl-2 flex items-center gap-2 capitalize">
-                                                                                    <PenLine
-                                                                                        width="16px"
-                                                                                        height="16px"
-                                                                                        aria-hidden="true"
-                                                                                    />
-                                                                                    <span>
-                                                                                        Penulis
-                                                                                        :{" "}
-                                                                                        {
-                                                                                            News.penulis
-                                                                                        }
-                                                                                    </span>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        {/* Footer News */}
-                                                                        <div className="md:flex justify-between items-center">
-                                                                            <a
-                                                                                href="#"
-                                                                                className="text-sm border border-gray-600 border-opacity-30 px-4 py-1 flex items-center rounded-lg"
-                                                                            >
-                                                                                Baca
-                                                                                Selengkapnya
-                                                                                →
-                                                                            </a>
-                                                                            <div className="flex bg-gray-900/20 border border-gray-700 rounded-2xl p-2 justify-between gap-3">
-                                                                                <button
-                                                                                    onClick={() =>
-                                                                                        swiperRef.current?.slidePrev()
-                                                                                    }
-                                                                                    className="cursor-pointer"
-                                                                                    aria-label="Berita Terbaru Sebelumnya"
-                                                                                >
-                                                                                    <ArrowLeft
-                                                                                        className="w-[25px] h-auto"
-                                                                                        alt="Next"
-                                                                                    />
-                                                                                </button>
-                                                                                <p className="text-sm">
-                                                                                    <span className="text-gray-300 ">
-                                                                                        {index +
-                                                                                            1}{" "}
-                                                                                        dari{" "}
-                                                                                        {
-                                                                                            newsData.length
-                                                                                        }
-                                                                                    </span>
-                                                                                </p>
-                                                                                <button
-                                                                                    onClick={() =>
-                                                                                        swiperRef.current?.slideNext()
-                                                                                    }
-                                                                                    className="cursor-pointer"
-                                                                                    aria-label="Berita Terbaru Selanjutnya"
-                                                                                >
-                                                                                    <ArrowRight
-                                                                                        className="w-[25px] h-auto "
-                                                                                        alt="Prev"
-                                                                                    />
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                        {/* Footer News */}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </SwiperSlide>
-                                                    );
-                                                })}
-                                        </Swiper>
-                                        {/* Image Section End */}
-                                    </div>
+                                    {/* <NewsSection /> */}
                                 </div>
                                 {/* List Berita Terbaru */}
                                 <div className=" w-full h-[518px] grid grid-cols-1 grid-rows-[38px_1fr] gap-4 ">
@@ -543,87 +311,7 @@ const Home = () => {
             </section>
             {/* Banner */}
             <section className="py-6 md:py-8 xl:py-12 my-10  ">
-                <div className="container mx-auto px-6 2xl:px-0 xl:max-w-7xl max-w-full xl:px-6 group">
-                    <Swiper
-                        autoplay={{
-                            delay: 5000,
-                            disableOnInteraction: false,
-                        }}
-                        mousewheel={true}
-                        spaceBetween={30}
-                        pagination={{
-                            el: ".custom-pagination",
-                            clickable: true,
-                        }}
-                        effect="slide"
-                        loop={true}
-                        speed={1500}
-                        navigation={{
-                            nextEl: ".custom-next",
-                            prevEl: ".custom-prev", // Gunakan class kustom
-                        }}
-                        modules={[Pagination, Autoplay, Navigation, Mousewheel]}
-                        className="mySwiper relative"
-                        breakpoints={{
-                            641: {
-                                slidesPerView: 1,
-                                allowTouchMove: true,
-                            },
-                            1024: {
-                                slidesPerView: 1.2,
-                                allowTouchMove: true,
-                            },
-                        }}
-                    >
-                        <SwiperSlide>
-                            <div className="w-full aspect-w-3 aspect-h-1 rounded-lg overflow-hidden">
-                                <picture>
-                                    <img
-                                        src={Slide1}
-                                        alt=""
-                                        width="360"
-                                        height="120"
-                                        className="w-full h-full object-cover bg-gray-200"
-                                    />
-                                </picture>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className="w-full aspect-w-3 aspect-h-1 rounded-lg overflow-hidden">
-                                <picture>
-                                    <img
-                                        src={Slide2}
-                                        alt=""
-                                        width="360"
-                                        height="120"
-                                        className="w-full h-full object-cover bg-gray-200"
-                                    />
-                                </picture>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className="w-full aspect-w-3 aspect-h-1 rounded-lg overflow-hidden">
-                                <picture>
-                                    <img
-                                        src={Slide3}
-                                        alt=""
-                                        width="360"
-                                        height="120"
-                                        className="w-full h-full object-cover bg-gray-200"
-                                    />
-                                </picture>
-                            </div>
-                        </SwiperSlide>
-
-                        <div className="custom-pagination mt-3 flex justify-center"></div>
-                        <div className="custom-prev   absolute left-2 top-1/2 -translate-y-1/2 z-10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
-                            <ArrowLeft className="bg-white border border-blue-400 w-full h-auto rounded-full" />
-                        </div>
-                        <div className="custom-next absolute right-2 top-1/2 -translate-y-1/2 z-10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
-                            <ArrowRight className="bg-white border border-blue-400 w-full h-auto rounded-full" />
-                        </div>
-                    </Swiper>
-                </div>
+                {/* <BannerSection /> */}
             </section>
 
             {/* Program Unggulan */}
@@ -675,9 +363,9 @@ const Home = () => {
                             <SwiperSlide>
                                 <div className="h-[253px] md:h-[234px] flex flex-col items-start gap-4 group bg-white p-6 rounded-xl border border-white hover:border-blue-400 hover:shadow-md transition-colors  duration-300">
                                     <img
-                                        src="#"
+                                        src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
                                         className=" h-[32px] "
-                                        alt=""
+                                        alt="gambar"
                                     />
                                     <h3 className="font-bold text-xl md:text-2xl leading-normal group-hover:text-blue-500">
                                         title
@@ -703,9 +391,9 @@ const Home = () => {
                             <SwiperSlide>
                                 <div className="h-[253px] md:h-[234px] flex flex-col items-start gap-4 group bg-white p-6 rounded-xl border border-white hover:border-blue-400 hover:shadow-md transition-colors  duration-300">
                                     <img
-                                        src="#"
+                                        src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
                                         className=" h-[32px] "
-                                        alt=""
+                                        alt="gambar"
                                     />
                                     <h3 className="font-bold text-xl md:text-2xl leading-normal group-hover:text-blue-500">
                                         title
@@ -762,8 +450,8 @@ const Home = () => {
                                 aria-label={`Buka `}
                             >
                                 <img
-                                    src=""
-                                    alt=""
+                                    src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
+                                    alt="gambar"
                                     loading="lazy"
                                     className="lazy-img w-fit h-10"
                                 />
@@ -786,8 +474,8 @@ const Home = () => {
                                 aria-label={`Buka `}
                             >
                                 <img
-                                    src=""
-                                    alt=""
+                                    src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
+                                    alt="gambar"
                                     loading="lazy"
                                     className="lazy-img w-fit h-10"
                                 />
@@ -809,8 +497,8 @@ const Home = () => {
                                 aria-label={`Buka `}
                             >
                                 <img
-                                    src=""
-                                    alt=""
+                                    src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
+                                    alt="gambar"
                                     loading="lazy"
                                     className="lazy-img w-fit h-10"
                                 />
@@ -833,11 +521,11 @@ const Home = () => {
                     Video Profil
                 </h2>
                 <div className="flex justify-center items-center">
-                    <iframe
+                    {/* <iframe
                         src="https://www.youtube.com/embed/Qw-r5FeDs9Q?si=ELT5j81X4CPUCv7_"
                         frameBorder="0"
                         className="rounded-xl w-full lg:w-[80%] h-[200px] sm:h-[450px] "
-                    ></iframe>
+                    ></iframe> */}
                 </div>
             </div>
         </main>
