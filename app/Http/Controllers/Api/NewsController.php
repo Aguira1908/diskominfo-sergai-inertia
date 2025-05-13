@@ -6,6 +6,7 @@ use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class NewsController extends Controller
 {
@@ -14,45 +15,44 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $cacheKey = 'news_index_' . md5(serialize($request->all()));
-
-        $news = Cache::remember($cacheKey, 3600, function () use ($request) {
-            $query = News::with([
-                'category' => function ($q) {
-                    $q->select('id', 'name', 'slug');
-                }
-            ])
-                ->select([
-                    'id',
-                    'title',
-                    'image',
-                    'slug',
-                    'category_id',
-                    'published_at',
-                    'created_at'
-                ]);
-
-            // Filter by Latest
-            if ($request->boolean('latest')) {
-                $query->latest('published_at');
+        $query = News::with([
+            'category' => function ($q) {
+                $q->select('id', 'name', 'slug');
             }
+        ])
+            ->select([
+                'id',
+                'title',
+                'image',
+                'slug',
+                'category_id',
+                'published_at',
+                'created_at'
+            ]);
 
-            // Filter latest per kategori
-            if ($request->boolean('latest_per_category')) {
-                $query->whereIn('id', function ($subquery) {
-                    $subquery->selectRaw('MAX(id)')
-                        ->from('news')
-                        ->groupBy('category_id');
-                });
-            }
+        // Filter berita terbaru secara global
+        if ($request->boolean('latest')) {
+            $query->latest('published_at');
+        }
 
-            $perPage = min($request->get('per_page', 5), 100);
+        // Filter berita terbaru per kategori
+        if ($request->boolean('latest_per_category')) {
+            $query->whereIn('id', function ($subquery) {
+                $subquery->selectRaw('MAX(id)')
+                    ->from('news')
+                    ->groupBy('category_id');
+            });
+        }
 
-            return $query->paginate($perPage)
-                ->setPath($request->url())
-                ->appends($request->query());
-        });
+        // Tentukan jumlah per halaman, maksimum 100
+        $perPage = min($request->get('per_page', 5), 100);
 
+        // Lakukan paginasi
+        $news = $query->paginate($perPage)
+            ->setPath($request->url())
+            ->appends($request->query());
+
+        // Response JSON
         return response()->json([
             'data' => $news->getCollection(),
             'meta' => [
@@ -76,20 +76,24 @@ class NewsController extends Controller
      */
     public function show(string $slug)
     { {
-            $news = Cache::remember("news_{$slug}", 3600, function () use ($slug) {
-                return News::with([
+            try {
+                $news = News::with([
                     'category' => function ($q) {
                         $q->select('id', 'name', 'slug');
                     }
                 ])
                     ->where('slug', $slug)
                     ->firstOrFail();
-            });
 
-            return response()->json([
-                'data' => $news,
-                'message' => 'Success'
-            ]);
+                return response()->json([
+                    'data' => $news,
+                    'message' => 'Success'
+                ]);
+            } catch (ModelNotFoundException $e) {
+                return response()->json([
+                    'message' => 'Berita tidak ditemukan.'
+                ], 404);
+            }
         }
     }
 

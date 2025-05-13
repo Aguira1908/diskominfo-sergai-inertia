@@ -27,27 +27,4 @@ class event extends Model
         'dresscode' => 'Bebas Sopan',
     ];
 
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
-    public function scopeUpcoming($query)
-    {
-        return $query->where('date', '>=', now()->toDateString())
-            ->orderBy('date')
-            ->orderBy('start_time');
-    }
-
-    public function getFormattedDateAttribute()
-    {
-        return Carbon::parse($this->date)->translatedFormat('d F Y');
-    }
-
-    public function getTimeRangeAttribute()
-    {
-        return Carbon::parse($this->start_time)->format('H:i')
-            . ' - '
-            . Carbon::parse($this->end_time)->format('H:i');
-    }
 }
