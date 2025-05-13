@@ -14,21 +14,18 @@ class NewsCategoryController extends Controller
      */
     public function index()
     {
-        try {
-            $newsCategory = Cache::remember('active_news_categories', 3600, function () {
-                return NewsCategory::where('is_active', true)->get();
-            });
+        $categories = NewsCategory::where('is_active', true)
+            ->get(['id', 'name', 'slug']); // hanya ambil field yang diperlukan
 
-
+        if (!$categories) {
             return response()->json([
-                'data' => $newsCategory,
-                'message' => 'Success'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Failed to retrieve categories: ' . $e->getMessage()
-            ], 500);
+                'success' => false,
+                'message' => 'kategori tidak ditemukan.',
+            ], 404);
         }
+
+        return response()->json($categories);
+
     }
 
     /**

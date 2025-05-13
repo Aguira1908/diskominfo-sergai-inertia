@@ -15,23 +15,19 @@ class BannerController extends Controller
      */
     public function index()
     {
-        try {
-            $banners = Cache::remember('active_banners', 3600, function () {
-                return Banner::active()
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-            });
+        $banner = Banner::where('is_active', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-            return response()->json([
-                'data' => $banners,
-                'message' => 'Success'
-            ]);
 
-        } catch (\Exception $e) {
+        if (!$banner) {
             return response()->json([
-                'message' => 'Failed to retrieve banners'
-            ], 500);
+                'success' => false,
+                'message' => 'Banner tidak ditemukan.',
+            ], 404);
         }
+
+        return response()->json($banner);
     }
 
     /**
