@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Carbon\Carbon;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,23 +16,34 @@ class EventController extends Controller
      */
     public function index()
     {
-        try {
-            $events = Cache::remember('active_events', 3600, function () {
-                return Event::active()
-                    ->upcoming()
-                    ->get();
+        // Set locale untuk Carbon jika ingin Bahasa Indonesia
+        Carbon::setLocale('id');
+
+        $events = Event::where('is_active', true)
+            ->orderBy('date', 'asc')
+            ->get()
+            ->map(function ($event) {
+                // Format tanggal dan waktu
+                $event->date_formatted = Carbon::parse($event->date)->translatedFormat('d F Y');
+                $event->time_range = "{$event->start_time} - {$event->end_time}";
+
+                // Opsional: sembunyikan field mentah jika tidak dibutuhkan
+                unset($event->created_at, $event->updated_at);
+
+                return $event;
             });
 
-            return response()->json([
-                'data' => $events,
-                'message' => 'Success'
-            ]);
 
-        } catch (\Exception $e) {
+        if (!$events) {
             return response()->json([
-                'message' => 'Failed to retrieve events: ' . $e->getMessage()
-            ], 500);
+                'success' => false,
+                'message' => 'event tidak ditemukan.',
+            ], 404);
         }
+
+        return response()->json($events);
+
+
     }
 
     /**

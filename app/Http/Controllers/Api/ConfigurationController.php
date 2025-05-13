@@ -15,24 +15,16 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        try {
-            $configuration = Cache::remember('active_configuration', 3600, function () {
-                return Configurations::where('is_active', true)->first();
-            });
+        $configuration = Configurations::where('is_active', true)->first();
 
-            if (!$configuration) {
-                return response()->json(['message' => 'Configuration not found'], 404);
-            }
-
+        if (!$configuration) {
             return response()->json([
-                'data' => $configuration,
-                'message' => 'Success'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Failed to retrieve configuration'
-            ], 500);
+                'success' => false,
+                'message' => 'Konfigurasi tidak ditemukan.',
+            ], 404);
         }
+
+        return response()->json($configuration);
     }
 
     /**

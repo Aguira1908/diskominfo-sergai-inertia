@@ -15,23 +15,18 @@ class FeaturedProgramController extends Controller
      */
     public function index()
     {
-        try {
-            $programs = Cache::remember('active_featured_programs', 3600, function () {
-                return FeaturedProgram::active()
-                    ->ordered()
-                    ->get();
-            });
+        $programs = FeaturedProgram::where('is_active', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
+        if (!$programs) {
             return response()->json([
-                'data' => $programs,
-                'message' => 'Success'
-            ]);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Failed to retrieve programs'
-            ], 500);
+                'success' => false,
+                'message' => 'Program tidak ditemukan.',
+            ], 404);
         }
+        return response()->json($programs);
+
     }
 
     /**
