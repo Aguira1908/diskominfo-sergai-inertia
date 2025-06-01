@@ -47,33 +47,6 @@ const Home = () => {
     const swiperRef = useRef(null);
     const [categoriesWithNews, setCategoriesWithNews] = useState(null);
 
-    // Data dummy berita
-    // const newsData = [
-    //     {
-    //         id: 1,
-    //         title: "Teknologi AI Terbaru Ubah Cara Kerja Perusahaan",
-    //         image: Image1,
-    //         penulis: "Ahmad Fauzi",
-    //         tanggal: "15 April 2024",
-    //         category: "Pemerintah",
-    //     },
-    //     {
-    //         id: 2,
-    //         title: "Pemerintah Umumkan Stimulus Ekonomi untuk UMKM",
-    //         image: Image2,
-    //         penulis: "Rina Wijaya",
-    //         tanggal: "10 April 2024",
-    //         category: "Pemerintah",
-    //     },
-    //     {
-    //         id: 3,
-    //         title: "Prediksi Harga Emas Naik 20% di Kuartal Kedua",
-    //         image: Image3,
-    //         penulis: "Budi Santoso",
-    //         tanggal: "5 April 2024",
-    //         category: "Pemerintah",
-    //     },
-    // ];
     return (
         <main className="overflow-hidden">
             <div className="relative">
@@ -311,7 +284,7 @@ const Home = () => {
             </section>
             {/* Banner */}
             <section className="py-6 md:py-8 xl:py-12 my-10  ">
-                {/* <BannerSection /> */}
+                <BannerSection />
             </section>
 
             {/* Program Unggulan */}
