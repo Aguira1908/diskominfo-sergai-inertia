@@ -27,12 +27,13 @@ import axios from "axios";
 
 const BannerSection = () => {
     const [banners, setBanners] = useState([]);
+    const swiperRef = useRef(null);
 
     useEffect(() => {
         const fetchBanner = async () => {
             try {
                 const response = await axios.get("/api/banners");
-                const apiData = response.data?.data || {};
+                const apiData = response?.data || [];
                 setBanners(apiData);
             } catch (err) {
                 console.log("Failed to fetch banner", err);
@@ -41,10 +42,10 @@ const BannerSection = () => {
 
         fetchBanner();
     }, []);
-    console.log(banners);
     return (
         <div className="container mx-auto px-6 2xl:px-0 xl:max-w-7xl max-w-full xl:px-6 group">
             <Swiper
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
                 autoplay={{
                     delay: 5000,
                     disableOnInteraction: false,
@@ -56,7 +57,7 @@ const BannerSection = () => {
                     clickable: true,
                 }}
                 effect="slide"
-                loop={true}
+                loop={banners.length > 1}
                 speed={1500}
                 navigation={{
                     nextEl: ".custom-next",
@@ -94,10 +95,10 @@ const BannerSection = () => {
                 })}
 
                 <div className="custom-pagination mt-3 flex justify-center"></div>
-                <div className="custom-prev   absolute left-2 top-1/2 -translate-y-1/2 z-10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
+                <div className="custom-prev cursor-pointer  absolute left-2 top-1/2 -translate-y-1/2 z-10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
                     <ArrowLeft className="bg-white border border-blue-400 w-full h-auto rounded-full" />
                 </div>
-                <div className="custom-next absolute right-2 top-1/2 -translate-y-1/2 z-10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
+                <div className="custom-next cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 z-10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
                     <ArrowRight className="bg-white border border-blue-400 w-full h-auto rounded-full" />
                 </div>
             </Swiper>

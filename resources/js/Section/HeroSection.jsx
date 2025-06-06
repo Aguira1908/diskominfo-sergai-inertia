@@ -42,7 +42,7 @@ const HeroSection = ({}) => {
         const fetchConfig = async () => {
             try {
                 const response = await axios.get("/api/configuration");
-                const apiData = response.data?.data || {};
+                const apiData = response?.data || {};
                 setConfig({
                     title: apiData.title || "Diskominfo Sergai",
                     slogan: apiData.slogan || "",

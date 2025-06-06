@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import {
+    Facebook,
+    ScreenShare,
+    Calendar,
+    PenLine,
+    ArrowRight,
+    ArrowLeft,
+    CalendarX2,
+} from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
+
+import {
+    EffectFade,
+    Autoplay,
+    Mousewheel,
+    Navigation,
+    Pagination,
+    Grid,
+} from "swiper/modules";
+
+import { Link } from "@inertiajs/react";
+
+import useLatestNewsStore from "../Global/useLatesNewsStore";
 
 const NewsSection = () => {
+    const swiperRef = useRef(null);
+
+    const { newsData, fetchLatestNews, isLoading, error } =
+        useLatestNewsStore();
     return (
         <div className="carousel w-full h-full overflow-hidden relative group">
             {/* Image Section Start*/}
@@ -33,7 +65,7 @@ const NewsSection = () => {
                                         <div className="flex-grow flex flex-col h-auto justify-between">
                                             <div>
                                                 <p className="font-roboto text-sm uppercase leading-relaxed tracking-wider opacity-80 mb-1">
-                                                    {News.category}
+                                                    {News.category.name}
                                                 </p>
                                                 <Link to={"#"} className="">
                                                     <h2 className="line-clamp-3 md:line-clamp-2 font-intro font-extrabold text-xl md:text-2xl leading-9 md:leading-10 max-h-[108px] md:max-h-[90px] mb-3">
@@ -51,7 +83,7 @@ const NewsSection = () => {
                                                     />
                                                     <span>
                                                         {new Date(
-                                                            News.tanggal
+                                                            News.published_at
                                                         ).toLocaleDateString(
                                                             "id-ID",
                                                             {
@@ -69,7 +101,9 @@ const NewsSection = () => {
                                                         aria-hidden="true"
                                                     />
                                                     <span>
-                                                        Penulis : {News.penulis}
+                                                        Penulis :{" "}
+                                                        {News.penulis ||
+                                                            "Admin"}
                                                     </span>
                                                 </p>
                                             </div>
