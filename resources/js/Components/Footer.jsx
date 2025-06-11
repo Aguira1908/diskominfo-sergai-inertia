@@ -21,7 +21,7 @@ const Footer = () => {
 
     console.log(configData);
     return (
-        <footer className="bg-gray-100">
+        <footer className="bg-gray-100 z-0">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:px-0 lg:py-8">
                 <div className="min-w-0 grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between gap-6 text-gray-800">
                     <div className="mb-6 md:mb-0">
