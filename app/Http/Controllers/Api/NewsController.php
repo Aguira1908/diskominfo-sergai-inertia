@@ -43,6 +43,12 @@ class NewsController extends Controller
                     ->groupBy('category_id');
             });
         }
+        // Filter berdasarkan kategori (slug)
+        if ($request->filled('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('slug', $request->get('category'));
+            });
+        }
 
         // Tentukan jumlah per halaman, maksimum 100
         $perPage = min($request->get('per_page', 5), 100);

@@ -4,6 +4,7 @@ import { ScreenShare } from "lucide-react";
 const LatestNewsCard = () => {
     const { newsData, fetchLatestNews, isLoading, error } =
         useLatestNewsStore();
+
     return (
         <ul className="  w-full h-full flex flex-col gap-4">
             {newsData.slice(0, 5).map((News, index) => {
