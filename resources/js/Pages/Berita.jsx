@@ -397,9 +397,141 @@ const Berita = () => {
                 <div className=" container mx-auto px-6 2xl:px-0 xl:max-w-7xl">
                     <div className="w-full shadow-xl h-full p-4 md:px-8 bg-white rounded-xl  grid grid-cols-1  xl:grid-cols-[1fr,315px] gap-6">
                         {/* Latest News By Category */}
-                        <h1 className="font-bold text-4xl py-2 text-gray-700">
-                            Berita Serdang Bedagai
-                        </h1>
+                        <div className="flex flex-col">
+                            <h1 className="font-bold text-4xl py-2 text-gray-700">
+                                Berita Serdang Bedagai
+                            </h1>
+                            <div className="relative flex justify-center mb-5 border-b-2 border-gray-200">
+                                {/* Blur Effect Kiri */}
+                                <div className="absolute left-0 md:-left-4 top-0 h-full  w-3 md:w-8 bg-gradient-to-r from-white via-white/80 to-transparent backdrop-blur-sm z-10 pointer-events-none" />
+
+                                {/* Blur Effect Kanan */}
+                                <div className="absolute right-0 md:-right-1 top-0 h-full w-3 md:w-8 bg-gradient-to-l from-white via-white/80 to-transparent backdrop-blur-sm z-10 pointer-events-none" />
+
+                                <Swiper
+                                    slidesPerView="auto"
+                                    spaceBetween={50}
+                                    centeredSlides={false}
+                                    style={{ overflow: "hidden" }}
+                                    className="overflow-hidden" // Important untuk membuat slide bisa keluar dari container
+                                    breakpoints={{
+                                        640: { spaceBetween: 24 },
+                                        1024: { spaceBetween: 32 },
+                                    }}
+                                >
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!w-auto">
+                                        <li
+                                            className={`relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group ${"border-b-2 border-blue-500 text-blue-500"}`}
+                                        >
+                                            <Link to={"#"}>
+                                                <span className="font-semibold text-sm group-hover:text-blue-500">
+                                                    Ekonomi
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    </SwiperSlide>
+                                </Swiper>
+                            </div>
+                        </div>
                         <section className="w-full h-full grid grid-cols-1 xl:grid-cols-[1fr_330px] gap-4 md:gap-10">
                             {/* Card News */}
                             <div className="w-full grid grid-cols-1 gap-8 grid-rows-1  xl:grid-cols-[1fr,330px]">
