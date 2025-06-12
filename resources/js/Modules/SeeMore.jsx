@@ -1,6 +1,5 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useState } from "react";
-
 const SeeMore = ({
     isOpen,
     setIsOpen,
@@ -11,6 +10,18 @@ const SeeMore = ({
     currentPage,
     setCurrentPage,
 }) => {
+    // Fungsi untuk mengatur current page agar tidak melebihi total pages
+    const handlePageChange = (page) => {
+        // Pastikan curPage tidak lebih dari totalPages
+        if (page < 1) {
+            setCurrentPage(1);
+        } else if (page > totalPages) {
+            setCurrentPage(totalPages);
+        } else {
+            setCurrentPage(page);
+        }
+    };
+
     return (
         <div className="w-full flex flex-col md:flex-row justify-between py-2">
             <div className="relative inline-flex w-full md:w-1/2">
@@ -88,19 +99,13 @@ const SeeMore = ({
                     </div>
                     <div className="flex w-full gap-2">
                         <button
-                            onClick={() =>
-                                setCurrentPage((p) => Math.max(p - 1, 1))
-                            }
+                            onClick={() => handlePageChange(currentPage - 1)}
                             className="px-3 py-2 text-sm font-medium text-gray-700"
                         >
                             <ArrowLeft />
                         </button>
                         <button
-                            onClick={() =>
-                                setCurrentPage((p) =>
-                                    Math.min(p + 1, totalPages)
-                                )
-                            }
+                            onClick={() => handlePageChange(currentPage + 1)}
                             className="px-3 py-2 text-sm font-medium text-gray-700"
                         >
                             <ArrowRight />
@@ -111,5 +116,4 @@ const SeeMore = ({
         </div>
     );
 };
-
 export default SeeMore;

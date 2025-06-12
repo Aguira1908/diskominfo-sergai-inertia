@@ -24,6 +24,7 @@ class NewsController extends Controller
                 'id',
                 'title',
                 'image',
+                'excerpt',
                 'slug',
                 'category_id',
                 'published_at',
@@ -41,6 +42,12 @@ class NewsController extends Controller
                 $subquery->selectRaw('MAX(id)')
                     ->from('news')
                     ->groupBy('category_id');
+            });
+        }
+        // Filter berdasarkan kategori (slug)
+        if ($request->filled('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('slug', $request->get('category'));
             });
         }
 

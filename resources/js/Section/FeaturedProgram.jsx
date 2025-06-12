@@ -57,7 +57,7 @@ const FeaturedProgram = () => {
             <div className=" py-2 group/swiper ">
                 {/* Card */}
                 <Swiper
-                    className="mySwiper relative"
+                    className="mySwiper relative items-center flex "
                     spaceBetween={20}
                     pagination={{
                         el: ".custom-pagination",
@@ -85,7 +85,7 @@ const FeaturedProgram = () => {
                         1024: {
                             slidesPerView: 3,
                             slidesPerGroup: 4,
-                            grid: { rows: 2, fill: "rows" },
+                            grid: { rows: 1, fill: "rows" },
                         },
                     }}
                     modules={[Navigation, Pagination, Mousewheel, Grid]}
@@ -102,7 +102,7 @@ const FeaturedProgram = () => {
                                     <h3 className="font-bold text-xl md:text-2xl leading-normal transition-colors  duration-300 group-hover:text-blue-500">
                                         {program.title}
                                     </h3>
-                                    <p className="text-sm  leading-6 text-blue-gray-800 group-hover:text-blue-gray-900 line-clamp-3 md:line-clamp-2">
+                                    <p className="text-sm  leading-6 text-blue-gray-800 group-hover:text-blue-gray-900  line-clamp-2">
                                         {program.description}
                                     </p>
 
@@ -119,117 +119,7 @@ const FeaturedProgram = () => {
                             </SwiperSlide>
                         );
                     })}
-                    <SwiperSlide>
-                        <div className="h-[253px] md:h-[234px] flex flex-col items-start gap-4 group bg-white p-6 rounded-xl border border-white hover:border-blue-400 hover:shadow-md transition-colors  duration-300">
-                            <img
-                                src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
-                                className=" h-[32px] "
-                                alt="gambar"
-                            />
-                            <h3 className="font-bold text-xl md:text-2xl leading-normal group-hover:text-blue-500">
-                                title
-                            </h3>
-                            <p className="text-sm leading-6 text-blue-gray-800 group-hover:text-blue-gray-900 line-clamp-3 md:line-clamp-2">
-                                description
-                            </p>
 
-                            <a href="#" className="w-full">
-                                <button
-                                    aria-label="Buka Program Unggulan"
-                                    className="flex justify-between font-sans-1 items-center text-blue-500 font-bold text-sm hover:bg-blue-100 rounded-lg transition-colors duration-200 py-1 px-2 w-full  "
-                                >
-                                    Selengkapnya
-                                    <div className="flex justify-center items-center w-[20px] h-auto ">
-                                        <ScreenShare />
-                                    </div>
-                                </button>
-                            </a>
-                        </div>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <div className="h-[253px] md:h-[234px] flex flex-col items-start gap-4 group bg-white p-6 rounded-xl border border-white hover:border-blue-400 hover:shadow-md transition-colors  duration-300">
-                            <img
-                                src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
-                                className=" h-[32px] "
-                                alt="gambar"
-                            />
-                            <h3 className="font-bold text-xl md:text-2xl leading-normal group-hover:text-blue-500">
-                                title
-                            </h3>
-                            <p className="text-sm leading-6 text-blue-gray-800 group-hover:text-blue-gray-900 line-clamp-3 md:line-clamp-2">
-                                description
-                            </p>
-
-                            <a href="#" className="w-full">
-                                <button
-                                    aria-label="Buka Program Unggulan"
-                                    className="flex justify-between font-sans-1 items-center text-blue-500 font-bold text-sm hover:bg-blue-100 rounded-lg transition-colors duration-200 py-1 px-2 w-full  "
-                                >
-                                    Selengkapnya
-                                    <div className="flex justify-center items-center w-[20px] h-auto ">
-                                        <ScreenShare />
-                                    </div>
-                                </button>
-                            </a>
-                        </div>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <div className="h-[253px] md:h-[234px] flex flex-col items-start gap-4 group bg-white p-6 rounded-xl border border-white hover:border-blue-400 hover:shadow-md transition-colors  duration-300">
-                            <img
-                                src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
-                                className=" h-[32px] "
-                                alt="gambar"
-                            />
-                            <h3 className="font-bold text-xl md:text-2xl leading-normal group-hover:text-blue-500">
-                                title
-                            </h3>
-                            <p className="text-sm leading-6 text-blue-gray-800 group-hover:text-blue-gray-900 line-clamp-3 md:line-clamp-2">
-                                description
-                            </p>
-
-                            <a href="#" className="w-full">
-                                <button
-                                    aria-label="Buka Program Unggulan"
-                                    className="flex justify-between font-sans-1 items-center text-blue-500 font-bold text-sm hover:bg-blue-100 rounded-lg transition-colors duration-200 py-1 px-2 w-full  "
-                                >
-                                    Selengkapnya
-                                    <div className="flex justify-center items-center w-[20px] h-auto ">
-                                        <ScreenShare />
-                                    </div>
-                                </button>
-                            </a>
-                        </div>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <div className="h-[253px] md:h-[234px] flex flex-col items-start gap-4 group bg-white p-6 rounded-xl border border-white hover:border-blue-400 hover:shadow-md transition-colors  duration-300">
-                            <img
-                                src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
-                                className=" h-[32px] "
-                                alt="gambar"
-                            />
-                            <h3 className="font-bold text-xl md:text-2xl leading-normal group-hover:text-blue-500">
-                                title
-                            </h3>
-                            <p className="text-sm leading-6 text-blue-gray-800 group-hover:text-blue-gray-900 line-clamp-3 md:line-clamp-2">
-                                description
-                            </p>
-
-                            <a href="#" className="w-full">
-                                <button
-                                    aria-label="Buka Program Unggulan"
-                                    className="flex justify-between font-sans-1 items-center text-blue-500 font-bold text-sm hover:bg-blue-100 rounded-lg transition-colors duration-200 py-1 px-2 w-full  "
-                                >
-                                    Selengkapnya
-                                    <div className="flex justify-center items-center w-[20px] h-auto ">
-                                        <ScreenShare />
-                                    </div>
-                                </button>
-                            </a>
-                        </div>
-                    </SwiperSlide>
                     <div className="custom-pagination mt-3 flex justify-center "></div>
 
                     <div className="custom-prev cursor-pointer  absolute left-2 top-1/2 -translate-y-1/2 z-10 opacity-0 md:group-hover/swiper:opacity-100 transition-opacity duration-200">

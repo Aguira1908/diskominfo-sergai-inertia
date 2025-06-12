@@ -19,7 +19,6 @@ const Footer = () => {
         fetchConfig();
     }, [fetchConfig]);
 
-    console.log(configData);
     return (
         <footer className="bg-gray-100 z-0">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:px-0 lg:py-8">
