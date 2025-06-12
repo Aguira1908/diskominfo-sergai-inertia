@@ -56,7 +56,7 @@ const NewsSection = () => {
                         <SwiperSlide key={index}>
                             <div className="w-full h-full group">
                                 <img
-                                    src={News.image}
+                                    src={News.image_url}
                                     alt=""
                                     className="w-full h-full absolute top-0 object-cover object-center"
                                 />
@@ -67,16 +67,18 @@ const NewsSection = () => {
                                                 <p className="font-roboto text-sm uppercase leading-relaxed tracking-wider opacity-80 mb-1">
                                                     {News.category.name}
                                                 </p>
-                                                <Link to={"#"} className="">
+                                                <a
+                                                    href={`/berita/${News.slug}`}
+                                                    className=""
+                                                >
                                                     <h2 className="line-clamp-3 md:line-clamp-2 font-intro font-extrabold text-xl md:text-2xl leading-9 md:leading-10 max-h-[108px] md:max-h-[90px] mb-3">
                                                         {News.title}
                                                     </h2>
-                                                </Link>
+                                                </a>
                                             </div>
                                             <div className="flex mb-5 flex-col md:flex-row gap-2 opacity-60 text-xs md:divide-x divide-white">
                                                 <p className="flex items-center gap-2 md:pr-2">
-                                                    <img
-                                                        src={Calendar}
+                                                    <Calendar
                                                         width="16px"
                                                         height="16px"
                                                         aria-hidden="true"

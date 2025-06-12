@@ -44,12 +44,11 @@ const NewsCardSection = () => {
                 className="mySwiper relative w-full h-full overflow-hidden"
             >
                 {newsData.slice(0, 5).map((News, index) => {
-                    console.log(News.slug);
                     return (
                         <SwiperSlide key={index}>
                             <div className="w-full h-full group">
                                 <img
-                                    src={News.image}
+                                    src={News.image_url}
                                     alt=""
                                     className="w-full h-full absolute top-0 object-cover object-center"
                                 />
@@ -60,27 +59,21 @@ const NewsCardSection = () => {
                                                 <p className="font-roboto text-sm uppercase leading-relaxed tracking-wider opacity-80 mb-1">
                                                     {News.category.name}
                                                 </p>
-                                                <Link
-                                                    to={`berita/${News.slug}`}
+                                                <a
+                                                    href={`/berita/${News.slug}`}
                                                     className=""
-                                                    w
                                                 >
                                                     <h2 className="line-clamp-3 md:line-clamp-2 font-intro font-extrabold text-xl md:text-2xl leading-9 md:leading-10 max-h-[108px] md:max-h-[90px] mb-3">
                                                         {News.title}
                                                     </h2>
-                                                </Link>
+                                                </a>
                                             </div>
                                             <div className="flex mb-5 flex-col md:flex-row gap-2 opacity-60 text-xs md:divide-x divide-white">
                                                 <p className="flex items-center gap-2 md:pr-2">
-                                                    <img
-                                                        src={Calendar}
-                                                        width="16px"
-                                                        height="16px"
-                                                        aria-hidden="true"
-                                                    />
+                                                    <Calendar className="w-[16px]" />
                                                     <span>
                                                         {new Date(
-                                                            News.date
+                                                            News.published_at
                                                         ).toLocaleDateString(
                                                             "id-ID",
                                                             {
@@ -98,7 +91,8 @@ const NewsCardSection = () => {
                                                         aria-hidden="true"
                                                     />
                                                     <span>
-                                                        Penulis : {News.writer}
+                                                        Penulis :{" "}
+                                                        {News.writer || "Admin"}
                                                     </span>
                                                 </p>
                                             </div>
@@ -106,12 +100,12 @@ const NewsCardSection = () => {
 
                                         {/* Footer News */}
                                         <div className="md:flex justify-between items-center">
-                                            <Link
-                                                to={`berita/${News.slug}`}
+                                            <a
+                                                href={`berita/${News.slug}`}
                                                 className="text-sm border border-gray-600 border-opacity-30 px-4 py-1 flex items-center rounded-lg"
                                             >
                                                 Baca Selengkapnya →
-                                            </Link>
+                                            </a>
                                             <div className="flex bg-gray-900/20 border border-gray-700 rounded-2xl p-2 justify-between gap-3">
                                                 <button
                                                     onClick={() =>
@@ -127,7 +121,8 @@ const NewsCardSection = () => {
                                                 </button>
                                                 <p className="text-sm">
                                                     <span className="text-gray-300 ">
-                                                        {index + 1} dari 5
+                                                        {index + 1} dari{" "}
+                                                        {newsData.length}
                                                     </span>
                                                 </p>
                                                 <button

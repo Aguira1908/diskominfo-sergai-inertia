@@ -53,7 +53,7 @@ const HeroNewsSection = () => {
                         <SwiperSlide key={index}>
                             <div>
                                 <img
-                                    src={news.image}
+                                    src={news.image_url}
                                     loading="lazy"
                                     alt="image"
                                     className="w-full h-full absolute top-0 object-cover object-center"
@@ -90,7 +90,7 @@ const HeroNewsSection = () => {
                                                     className="w-5"
                                                 />
                                                 {new Date(
-                                                    news.latest_news?.published_at // <-- perbaikan di sini
+                                                    news.published_at // <-- perbaikan di sini
                                                 ).toLocaleDateString("id-ID", {
                                                     day: "numeric",
                                                     month: "long",
@@ -104,19 +104,19 @@ const HeroNewsSection = () => {
                                                     alt=""
                                                 />
                                                 Penulis:{" "}
-                                                {news.latest_news?.writer}
+                                                {news.writer || "Admin"}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="div7 md:col-span-4 md:row-start-5 p-1 md:p-4 rounded-lg">
                                         <div className="flex justify-between flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4">
-                                            <Link
-                                                to={`/artikel/${news.latest_news?.slug}`}
+                                            <a
+                                                href={`/berita/${news.slug}`}
                                                 className="text-sm border border-gray-600 border-opacity-30 px-4  flex items-center rounded-lg"
                                             >
                                                 Baca Selengkapnya →
-                                            </Link>
+                                            </a>
 
                                             <div className="flex bg-gray-950 border border-gray-700 rounded-2xl p-2 justify-between gap-3">
                                                 <button

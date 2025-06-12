@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ScreenShare } from "lucide-react";
+import { ScreenShare, Newspaper } from "lucide-react";
 
 import "../../css/Home.css";
 import HeroSection from "../Section/HeroSection";
@@ -40,18 +40,32 @@ const Home = () => {
                                     <hr className="border-r border-gray-500 " />
                                 </div>
                                 <a
-                                    href="#"
+                                    href="/berita"
                                     aria-label="Lihat Semua Berita"
                                     className=""
                                 >
-                                    <button className="flex justify-between items-center text-blue-500 py-2 px-3 font-medium text-sm border border-blue-300 rounded-xl">
+                                    <div className="flex justify-between items-center hover:text-blue-500 py-2 px-3 font-medium text-sm border hover:border-blue-300 rounded-xl">
                                         <p className="px-2">
                                             Lihat Semua berita
                                         </p>
                                         <div>
                                             <ScreenShare className="w-3 h-auto " />
                                         </div>
-                                    </button>
+                                    </div>
+                                </a>
+                                <a
+                                    href="/berita"
+                                    aria-label="Lihat Semua Berita"
+                                    className=""
+                                >
+                                    <div className="flex justify-between items-center  py-2 px-3 font-medium text-sm border bg-blue-500 hover:bg-blue-600 border-blue-400 text-white rounded-xl">
+                                        <p className="px-2">
+                                            Lihat Ringkasan Berita
+                                        </p>
+                                        <div>
+                                            <Newspaper className="w-3 h-auto " />
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                             {/* Berita */}
@@ -61,7 +75,7 @@ const Home = () => {
                                 </div>
                                 {/* List Berita Terbaru */}
                                 <div className=" w-full h-[518px] grid grid-cols-1 grid-rows-[38px_1fr] gap-4 ">
-                                    <button
+                                    <div
                                         className="flex items-center border-b-4 border-blue-400 "
                                         aria-hidden="true"
                                     >
@@ -70,7 +84,7 @@ const Home = () => {
                                                 TERBARU
                                             </h1>
                                         </div>
-                                    </button>
+                                    </div>
                                     <LatestNewsCard />
                                 </div>
                             </div>

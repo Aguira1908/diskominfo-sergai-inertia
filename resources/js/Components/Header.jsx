@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ChevronDown, CircleX, Menu } from "lucide-react";
 import Information from "../../../public/images/informasi.svg";
 import axios from "axios";
+import Logo from "../../../public/images/diskominfosergei.avif";
 
 const Header = () => {
     const [menu, setMenu] = useState();
@@ -37,7 +38,7 @@ const Header = () => {
                         href={"/"}
                         className="mr-auto h-full  md:h-10 nuxt-link-exact-active nuxt-link-active"
                     >
-                        <img src="#" alt="Logo" className=" w-32 auto" />
+                        <img src={Logo} alt="Logo" className=" w-32 auto" />
                     </Link>
                     <ul className="items-center gap-4 text-white hidden lg:flex lg:gap-[16px]">
                         {menu?.map((item, index) => {

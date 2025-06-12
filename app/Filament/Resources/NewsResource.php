@@ -57,6 +57,12 @@ class NewsResource extends Resource
                             ->image()
                             ->maxSize(2048),
 
+                        Forms\Components\TextInput::make('excerpt')
+                            ->maxLength(255)
+                            ->required()
+                            ->live(onBlur: true),
+
+
                         Forms\Components\DateTimePicker::make('published_at')
                             ->label('Publish Date')
                             ->default(now()),

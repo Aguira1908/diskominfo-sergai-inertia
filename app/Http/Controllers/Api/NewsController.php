@@ -24,6 +24,7 @@ class NewsController extends Controller
                 'id',
                 'title',
                 'image',
+                'excerpt',
                 'slug',
                 'category_id',
                 'published_at',

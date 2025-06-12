@@ -16,12 +16,20 @@ class News extends Model
     protected $fillable = [
         'title',
         'image',
+        'excerpt',
         'content',
         'slug',
         'category_id',
         'is_active',
         'published_at'
     ];
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        return url('storage/' . $this->image);
+    }
 
 
     public function category()

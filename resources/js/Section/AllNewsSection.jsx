@@ -20,28 +20,23 @@ const AllNewsSection = ({ currentCategory, curPage, seeMore }) => {
     return (
         <ul>
             {currentNews.map((News, index) => (
-                <li key={index} className="group mb-3 ">
-                    <Link to="#" className="h-fit ">
-                        <article className="flex lg:grid-cols-3 gap-5 my-2 group-hover:bg-gray-100">
-                            <div className="hidden w-full p-3 overflow-clip rounded-xl  md:block aspect-video">
+                <li key={index} className="group mb-3  ">
+                    <a href={`/berita/${News.slug}`} className="h-fit ">
+                        <article className="flex flex-col lg:grid lg:grid-cols-[250px_1fr] gap-5 my-2 p-3 group-hover:bg-gray-100 rounded-2xl">
+                            <div className="hidden overflow-hidden rounded-xl  lg:block aspect-video">
                                 <img
-                                    src="#"
-                                    className="w-full h-full rounded-lg object-cover object-center duration-300 ease-brand group-hover:scale-125"
+                                    src={News.image_url}
+                                    loading="lazy"
+                                    className="w-full h-auto  rounded-xl group-hover:scale-120 transition-all"
                                     alt=""
                                 />
                             </div>
-                            <div className="flex flex-col gap-3 lg:col-span-2 p-2">
+                            <div className="flex flex-col gap-3  p-2">
                                 <h2 className="font-semibold text-lg hover:underline text-gray-900 hover:text-blue-500s">
                                     {News.title}
                                 </h2>
-                                <div className="text-black/70 font-semibold line-clamp-3">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Ex dolor in officiis quam
-                                    labore, porro corporis dolore modi
-                                    doloremque id magni molestias, iure
-                                    provident iste autem quaerat ullam, adipisci
-                                    eaque excepturi. Suscipit, rem totam
-                                    adipisci laborum aspernatur quis eaque ea?
+                                <div className="text-black/70 font-semibold line-clamp-3 text-justify">
+                                    {News.excerpt}
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <h3 className="text-xs">
@@ -60,7 +55,7 @@ const AllNewsSection = ({ currentCategory, curPage, seeMore }) => {
                                 </div>
                             </div>
                         </article>
-                    </Link>
+                    </a>
                 </li>
             ))}
         </ul>

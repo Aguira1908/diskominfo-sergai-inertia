@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('image');
+            $table->longText('excerpt');
             $table->longText('content');
             $table->string('slug')->unique();
             $table->foreignId('category_id')->constrained('news_categories');
