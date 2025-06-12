@@ -1,42 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import {
-    Facebook,
-    ScreenShare,
     Calendar,
     PenLine,
     ArrowRight,
     ArrowLeft,
-    CalendarX2,
+    ScreenShare,
 } from "lucide-react";
+import Image1 from "../../../storage/app/public/news-images/01JV4CNY9XDQ66ASKCXVX2SWZT.jpeg";
+import "../../css/app.css";
+import { usePage } from "@inertiajs/react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import "swiper/css/pagination";
-
-import {
-    EffectFade,
-    Autoplay,
-    Mousewheel,
-    Navigation,
-    Pagination,
-    Grid,
-} from "swiper/modules";
+import { EffectFade, Autoplay } from "swiper/modules";
 
 import { Link } from "@inertiajs/react";
-
 import useLatestNewsStore from "../Global/useLatesNewsStore";
-
-const NewsSection = () => {
+const NewsCardSection = () => {
     const swiperRef = useRef(null);
+    const { newsData, fetchLatestNews } = useLatestNewsStore();
 
-    const { newsData, fetchLatestNews, isLoading, error } =
-        useLatestNewsStore();
+    useEffect(() => {
+        fetchLatestNews();
+    }, []);
+
     return (
-        <div className="carousel w-full h-full overflow-hidden relative group">
-            {/* Image Section Start*/}
-            {/* Banner Berita */}
+        <div className="shadow w-full h-full overflow-hidden relative group">
             <Swiper
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
                 autoplay={{
@@ -51,7 +44,6 @@ const NewsSection = () => {
                 className="mySwiper relative w-full h-full overflow-hidden"
             >
                 {newsData.slice(0, 5).map((News, index) => {
-                    console.log(News);
                     return (
                         <SwiperSlide key={index}>
                             <div className="w-full h-full group">
@@ -78,11 +70,7 @@ const NewsSection = () => {
                                             </div>
                                             <div className="flex mb-5 flex-col md:flex-row gap-2 opacity-60 text-xs md:divide-x divide-white">
                                                 <p className="flex items-center gap-2 md:pr-2">
-                                                    <Calendar
-                                                        width="16px"
-                                                        height="16px"
-                                                        aria-hidden="true"
-                                                    />
+                                                    <Calendar className="w-[16px]" />
                                                     <span>
                                                         {new Date(
                                                             News.published_at
@@ -104,8 +92,7 @@ const NewsSection = () => {
                                                     />
                                                     <span>
                                                         Penulis :{" "}
-                                                        {News.penulis ||
-                                                            "Admin"}
+                                                        {News.writer || "Admin"}
                                                     </span>
                                                 </p>
                                             </div>
@@ -114,7 +101,7 @@ const NewsSection = () => {
                                         {/* Footer News */}
                                         <div className="md:flex justify-between items-center">
                                             <a
-                                                href="#"
+                                                href={`berita/${News.slug}`}
                                                 className="text-sm border border-gray-600 border-opacity-30 px-4 py-1 flex items-center rounded-lg"
                                             >
                                                 Baca Selengkapnya →
@@ -160,9 +147,8 @@ const NewsSection = () => {
                     );
                 })}
             </Swiper>
-            {/* Image Section End */}
         </div>
     );
 };
 
-export default NewsSection;
+export default NewsCardSection;
