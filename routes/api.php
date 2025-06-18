@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\NewsCategoryController;
 use App\Http\Controllers\Api\ConfigurationController;
+use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\APi\FeaturedProgramController;
 
 Route::get('/user', function (Request $request) {
@@ -26,6 +27,11 @@ Route::get('/events', [EventController::class, 'index']);
 
 Route::get('/news-category', [NewsCategoryController::class, 'index']);
 
+// Get contents by menu/submenu
+Route::get('/contents', [ContentController::class, 'index']);
+
+// Get single content by slug
+Route::get('/contents/{slug}', [ContentController::class, 'show']);
 // routes/api.php
 Route::get('/news', [NewsController::class, 'index']);
 Route::get('/news/{slug}', [NewsController::class, 'show']);
