@@ -114,7 +114,7 @@ const NewsSection = () => {
                                         {/* Footer News */}
                                         <div className="md:flex justify-between items-center">
                                             <a
-                                                href="#"
+                                                href={`/berita/${News.slug}`}
                                                 className="text-sm border border-gray-600 border-opacity-30 px-4 py-1 flex items-center rounded-lg"
                                             >
                                                 Baca Selengkapnya →
