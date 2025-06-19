@@ -27,6 +27,89 @@ class ContentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Menu Management';
 
+    // public static function form(Form $form): Form
+    // {
+    //     return $form
+    //         ->schema([
+    //             Section::make('Content Information')
+    //                 ->heading('Buat Kontent')
+    //                 ->description('Anda Hanya Dapat Memasukkan Antara Menu dan Sub-Menu')
+    //                 ->schema([
+    //                     Select::make('menu_id')
+    //                         ->label('Parent Menu')
+    //                         ->relationship('menu', 'title')
+    //                         ->searchable()
+    //                         ->preload()
+    //                         ->nullable()
+    //                         ->hint('Pilih menu utama (opsional)')
+    //                         ->live()
+    //                         ->afterStateUpdated(function ($state, Forms\Set $set) {
+    //                             if ($state) {
+    //                                 $set('sub_menu_id', null);
+    //                             }
+    //                         })
+    //                         ->rules([
+    //                             fn(Forms\Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
+    //                                 if ($value && $get('sub_menu_id')) {
+    //                                     $fail('Anda hanya bisa memilih Menu atau Sub Menu, tidak keduanya.');
+    //                                 }
+    //                             },
+    //                         ]),
+
+
+    //                     Select::make('sub_menu_id')
+    //                         ->label('Submenu')
+    //                         ->relationship('submenu', 'title')
+    //                         ->searchable()
+    //                         ->preload()
+    //                         ->nullable()
+    //                         ->hint('Pilih submenu (opsional)')
+    //                         ->live()
+    //                         ->afterStateUpdated(function ($state, Forms\Set $set) {
+    //                             if ($state) {
+    //                                 $set('menu_id', null);
+    //                             }
+    //                         })
+    //                         ->rules([
+    //                             fn(Forms\Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
+    //                                 if ($value && $get('menu_id')) {
+    //                                     $fail('Anda hanya bisa memilih Menu atau Sub Menu, tidak keduanya.');
+    //                                 }
+    //                             },
+    //                         ]),
+
+
+    //                     TextInput::make('title')
+    //                         ->required()
+    //                         ->maxLength(255)
+    //                         ->live(onBlur: true)
+    //                         ->afterStateUpdated(function ($state, $set) {
+    //                             $set('slug', Str::slug($state));
+    //                         }),
+
+    //                     TextInput::make('slug')
+    //                         ->required()
+    //                         ->maxLength(255)
+    //                         ->unique(ignoreRecord: true)
+    //                         ->regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/'),
+
+    //                     TiptapEditor::make('content')
+    //                         ->required()
+    //                         ->columnSpanFull()
+    //                         ->profile('default')
+    //                         ->directory('content'),
+
+
+    //                     Toggle::make('is_active')
+    //                         ->label('Active Status')
+    //                         ->default(true)
+    //                         ->required(),
+
+    //                 ])
+    //         ]);
+    // }
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -41,43 +124,42 @@ class ContentResource extends Resource
                             ->searchable()
                             ->preload()
                             ->nullable()
-                            ->hint('Pilih menu utama (opsional)')
+                            ->hint('Pilih menu utama')
                             ->live()
                             ->afterStateUpdated(function ($state, Forms\Set $set) {
-                                if ($state) {
-                                    $set('sub_menu_id', null);
-                                }
-                            })
-                            ->rules([
-                                fn(Forms\Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
-                                    if ($value && $get('sub_menu_id')) {
-                                        $fail('Anda hanya bisa memilih Menu atau Sub Menu, tidak keduanya.');
-                                    }
-                                },
-                            ]),
-
+                                $set('sub_menu_id', null);
+                            }),
 
                         Select::make('sub_menu_id')
                             ->label('Submenu')
-                            ->relationship('submenu', 'title')
                             ->searchable()
                             ->preload()
                             ->nullable()
-                            ->hint('Pilih submenu (opsional)')
-                            ->live()
-                            ->afterStateUpdated(function ($state, Forms\Set $set) {
-                                if ($state) {
-                                    $set('menu_id', null);
-                                }
-                            })
-                            ->rules([
-                                fn(Forms\Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
-                                    if ($value && $get('menu_id')) {
-                                        $fail('Anda hanya bisa memilih Menu atau Sub Menu, tidak keduanya.');
-                                    }
-                                },
-                            ]),
+                            ->hint(function (Forms\Get $get) {
+                                $menuId = $get('menu_id');
+                                if (!$menuId)
+                                    return 'Pilih menu terlebih dahulu';
 
+                                $menu = \App\Models\Menu::find($menuId);
+                                return $menu && $menu->submenus()->exists()
+                                    ? 'Wajib pilih sub menu'
+                                    : 'Menu ini tidak memiliki sub menu';
+                            })
+                            ->options(function ($get) {
+                                $menuId = $get('menu_id');
+                                return $menuId
+                                    ? \App\Models\SubMenu::where('menu_id', $menuId)->pluck('title', 'id')
+                                    : [];
+                            })
+                            ->required(function (Forms\Get $get) {
+                                $menuId = $get('menu_id');
+                                if (!$menuId)
+                                    return false;
+
+                                $menu = \App\Models\Menu::find($menuId);
+                                return $menu && $menu->submenus()->exists();
+                            })
+                            ->disabled(fn($get) => !$get('menu_id')),
 
                         TextInput::make('title')
                             ->required()
@@ -88,10 +170,10 @@ class ContentResource extends Resource
                             }),
 
                         TextInput::make('slug')
-                            ->required()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true)
-                            ->regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/'),
+                            ->regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/')
+                            ->hint('Tunggu hingga slug tergenerate otomatis'),
 
                         TiptapEditor::make('content')
                             ->required()
@@ -99,15 +181,18 @@ class ContentResource extends Resource
                             ->profile('default')
                             ->directory('content'),
 
-
                         Toggle::make('is_active')
                             ->label('Active Status')
                             ->default(true)
                             ->required(),
-
                     ])
             ]);
     }
+
+
+
+
+
 
     public static function table(Table $table): Table
     {
