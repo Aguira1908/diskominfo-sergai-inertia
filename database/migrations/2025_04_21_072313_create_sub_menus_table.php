@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('menu_id')->constrained()->onDelete('cascade');
             $table->string('title', 255);
+            $table->longText('excerpt');
             $table->string('url_slug', 255)->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
