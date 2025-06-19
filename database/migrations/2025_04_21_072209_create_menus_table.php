@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
+            $table->longText('excerpt')->nullable();
             $table->string('url_slug', 255)->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

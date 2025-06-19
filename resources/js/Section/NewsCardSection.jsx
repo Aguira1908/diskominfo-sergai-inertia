@@ -7,7 +7,6 @@ import {
     ArrowLeft,
     ScreenShare,
 } from "lucide-react";
-import Image1 from "../../../storage/app/public/news-images/01JV4CNY9XDQ66ASKCXVX2SWZT.jpeg";
 import "../../css/app.css";
 import { usePage } from "@inertiajs/react";
 
