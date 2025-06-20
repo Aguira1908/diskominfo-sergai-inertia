@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Menu extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'url_slug', 'is_active'];
+    protected $fillable = ['title', 'excerpt', 'url_slug', 'is_active'];
 
     public function submenus(): HasMany
     {

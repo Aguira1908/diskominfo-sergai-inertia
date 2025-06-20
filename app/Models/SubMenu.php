@@ -10,7 +10,7 @@ class SubMenu extends Model
 {
 
     protected $table = 'sub_menus';
-    protected $fillable = ['menu_id', 'title', 'url_slug', 'position', 'is_active'];
+    protected $fillable = ['menu_id', 'title', 'excerpt', 'url_slug', 'position', 'is_active'];
 
     protected $casts = [
         'is_active' => 'boolean',

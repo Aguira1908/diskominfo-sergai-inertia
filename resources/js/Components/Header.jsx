@@ -1,7 +1,6 @@
 import { Link } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
-import { ChevronDown, CircleX, Menu } from "lucide-react";
-import Information from "../../../public/images/informasi.svg";
+import { ChevronDown, CircleX, Menu, Info } from "lucide-react";
 import axios from "axios";
 import Logo from "../../../public/images/diskominfosergei.avif";
 
@@ -47,6 +46,9 @@ const Header = () => {
                                     {item.submenus.length === 0 ? (
                                         <Link
                                             href={`/${item.url_slug}`}
+                                            onClick={() => {
+                                                setActiveMenu(null);
+                                            }}
                                             className="mr-auto w-8 h-8 lg:w-[38px] lg:h-[38px] xl:w-[228px] xl:h-[38px]"
                                         >
                                             <span className=" font-[400] leading-7 text-gray-700 px-4 py-2">
@@ -92,31 +94,29 @@ const Header = () => {
                                                 {activeMenu.submenus.map(
                                                     (submenu, index) => (
                                                         <Link
+                                                            onClick={() => {
+                                                                setActiveMenu(
+                                                                    null
+                                                                );
+                                                            }}
                                                             key={index}
                                                             href={`/${activeMenu.url_slug}/${submenu.url_slug}`}
-                                                            className="flex items-start text-gray-800"
+                                                            className="flex items-start text-gray-800 group hover:bg-gray-100 p-2 rounded-xl "
                                                         >
-                                                            <img
-                                                                src={
-                                                                    Information
-                                                                }
-                                                                className="w-[52px] h-auto mt-1.5"
+                                                            <Info
+                                                                className="w-[40px] p-1 text-blue-500 bg-blue-200/40 rounded-xl stroke-3 h-auto mt-1.5"
                                                                 alt="Informasi"
                                                             />
                                                             <div className="ml-4">
-                                                                <h2 className=" text-lg leading-[23px] font-bold mb-1">
+                                                                <h2 className="group-hover:underline   text-lg leading-[23px] font-bold mb-1">
                                                                     {
                                                                         submenu.title
                                                                     }
                                                                 </h2>
                                                                 <p className="text-sm opacity-80">
-                                                                    Lorem ipsum
-                                                                    dolor sit
-                                                                    amet
-                                                                    consectetur
-                                                                    adipisicing
-                                                                    elit. Velit,
-                                                                    iusto.
+                                                                    {
+                                                                        submenu.excerpt
+                                                                    }
                                                                 </p>
                                                             </div>
                                                         </Link>
@@ -186,11 +186,17 @@ const Header = () => {
                             <section className="min-w-0 flex flex-col  ">
                                 {menu?.map((item, index) => {
                                     return (
-                                        <details className="py-4 text-gray-700 group">
+                                        <details
+                                            key={index}
+                                            className="py-4 text-gray-700 group"
+                                        >
                                             <summary className="flex justify-between items-center cursor-pointer">
                                                 {item.submenus.length === 0 ? (
                                                     <Link
                                                         href={`/${item.url_slug}`}
+                                                        onClick={() => {
+                                                            setIsOpenHam(false);
+                                                        }}
                                                     >
                                                         {item.title}
                                                     </Link>
@@ -215,6 +221,11 @@ const Header = () => {
                                                             <li key={index}>
                                                                 <Link
                                                                     href={`/${item.url_slug}/${submenu.url_slug}`}
+                                                                    onClick={() => {
+                                                                        setIsOpenHam(
+                                                                            false
+                                                                        );
+                                                                    }}
                                                                 >
                                                                     {
                                                                         submenu.title

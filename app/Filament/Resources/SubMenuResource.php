@@ -47,6 +47,9 @@ class SubMenuResource extends Resource
                                 $set('url_slug', Str::slug($state));
                             }),
 
+                        TextInput::make('excerpt')
+                            ->hint('Isi ringkasan singkat dari menu ini (kosongkan jika menu memiliki sub-menu)'),
+
                         TextInput::make('url_slug')
                             ->label('URL Slug')
                             ->maxLength(255)
@@ -75,6 +78,9 @@ class SubMenuResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->sortable()
                     ->searchable(),
+
+                Tables\Columns\TextColumn::make('excerpt'),
+
 
                 Tables\Columns\TextColumn::make('url_slug')
                     ->searchable()
