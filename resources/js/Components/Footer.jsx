@@ -1,4 +1,4 @@
-import Logo from "../../../public/images/diskominfosergei.avif";
+import Logo from "/public/images/diskominfosergei.avif";
 import {
     Facebook,
     Instagram,
