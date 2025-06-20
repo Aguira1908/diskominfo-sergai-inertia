@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { ChevronDown, CircleX, Menu, Info } from "lucide-react";
 import axios from "axios";
-import Logo from "../../../public/images/diskominfosergei.avif";
+import Logo from "/public/images/diskominfosergei.avif";
 
 const Header = () => {
     const [menu, setMenu] = useState();
