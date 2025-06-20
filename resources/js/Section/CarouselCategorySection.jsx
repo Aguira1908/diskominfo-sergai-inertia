@@ -53,7 +53,8 @@ const CarouselCategorySection = ({ categoryHandler, activeCategory }) => {
                 1024: { spaceBetween: 32 },
             }}
         >
-            <SwiperSlide className="!w-auto">
+            {/* proses develop */}
+            {/* <SwiperSlide className="!w-auto">
                 <li
                     className={
                         "relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group border-2 rounded-full border-blue-500 text-blue-500"
@@ -65,7 +66,7 @@ const CarouselCategorySection = ({ categoryHandler, activeCategory }) => {
                         </span>
                     </Link>
                 </li>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {category.map((cat, index) => {
                 return (
                     <SwiperSlide className="!w-auto" key={index}>

@@ -66,14 +66,13 @@ const AgendaSection = () => {
         [agendas, selectedDate]
     );
 
-    console.log(selectedDateHasEvent);
     return (
         <div className="rounded-br-md rounded-bl-md pt-3 flex-grow bg-white border border-blue-gray-50 overflow-hidden">
             <div className=" flex flex-col gap-6">
                 <div className="px-4 text-slate-600 ">
-                    <p className="font-bold text-sm mb-1">monthName year</p>
+                    <p className="font-bold text-sm mb-1">{monthName}</p>
                     <p className="text-xs text-gray-500">
-                        Minggu Ke weekNumber
+                        Minggu Ke {weekNumber}
                     </p>
                 </div>
                 <div className="relative w-full h-fit">
