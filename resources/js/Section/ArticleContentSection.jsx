@@ -19,8 +19,6 @@ const ArticleContentSection = ({ slug }) => {
         }
     }, [slug, fetchArticleContent]);
 
-    console.log(contentData);
-
     return (
         <article
             className="prose  prose-zinc    prose-p:leading-7 prose-img:rounded-lg mx-auto max-w-full"
