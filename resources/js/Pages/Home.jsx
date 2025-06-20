@@ -53,7 +53,8 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </a>
-                                <a
+                                {/* Proses Develop */}
+                                {/* <a
                                     href="/berita"
                                     aria-label="Lihat Semua Berita"
                                     className=""
@@ -66,7 +67,7 @@ const Home = () => {
                                             <Newspaper className="w-3 h-auto " />
                                         </div>
                                     </div>
-                                </a>
+                                </a> */}
                             </div>
                             {/* Berita */}
                             <div className="w-full grid grid-cols-1 gap-8 md:grid-rows-1 lg:grid-cols-[1fr_330px]">
@@ -122,18 +123,19 @@ const Home = () => {
             </section>
 
             {/* Video Profil */}
-            <div className="container mx-auto px-6 2xl:px-0 xl:max-w-7xl py-8">
+            {/* Proses Develop */}
+            {/* <div className="container mx-auto px-6 2xl:px-0 xl:max-w-7xl py-8">
                 <h2 className="text-blue-gray-800 text-lg font-bold mb-8">
                     Video Profil
                 </h2>
                 <div className="flex justify-center items-center">
-                    {/* <iframe
+                    <iframe
                         src="https://www.youtube.com/embed/Qw-r5FeDs9Q?si=ELT5j81X4CPUCv7_"
                         frameBorder="0"
                         className="rounded-xl w-full lg:w-[80%] h-[200px] sm:h-[450px] "
-                    ></iframe> */}
+                    ></iframe>
                 </div>
-            </div>
+            </div> */}
         </main>
     );
 };

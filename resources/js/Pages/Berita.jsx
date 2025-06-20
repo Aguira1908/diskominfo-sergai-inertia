@@ -117,47 +117,6 @@ const Berita = () => {
                                     </div>
                                 </div>
                                 <LatestNewsCard />
-                                {/* <ul className="  w-full h-full flex flex-col gap-4">
-                                    {LatestNewsFilter.slice(0, 4).map(
-                                        (News, index) => (
-                                            <li
-                                                key={index}
-                                                className="group p-3 rounded-xl hover:bg-gray-200 text-slate-800 transition-colors duration-500 "
-                                            >
-                                                <a href="#">
-                                                    <div className="flex flex-col gap-3 w-full">
-                                                        <h2 className="line-clamp-2 font-medium leading-7 group-hover:text-blue-700">
-                                                            {News.title}
-                                                        </h2>
-                                                        <div className="flex justify-between items-center">
-                                                            <h3 className="text-xs">
-                                                                <span>
-                                                                    {
-                                                                        News.category
-                                                                    }
-                                                                </span>
-                                                                <span> | </span>
-                                                                <span>
-                                                                    {new Date(
-                                                                        News.date
-                                                                    ).toLocaleDateString(
-                                                                        "id-ID",
-                                                                        {
-                                                                            day: "numeric",
-                                                                            month: "long",
-                                                                            year: "numeric",
-                                                                        }
-                                                                    )}
-                                                                </span>
-                                                            </h3>
-                                                            <ScreenShare className="w-[13px] h-auto hidden group-hover:block text-blue-600" />
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        )
-                                    )}
-                                </ul> */}
                             </div>
                         </section>
                     </div>

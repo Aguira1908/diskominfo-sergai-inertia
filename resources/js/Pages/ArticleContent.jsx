@@ -8,11 +8,20 @@ import { Mousewheel } from "swiper/modules";
 import ArticleContentSection from "../Section/ArticleContentSection";
 
 const ArticleContent = ({ menu, submenu }) => {
+    const [currentMenu, setCurrentMenu] = useState({});
     const [menuContent, setMenuContent] = useState([]);
 
     const [currentSlug, setCurrentSlug] = useState("");
 
-    // fetch menu
+    // Cek Current Menu
+    useEffect(() => {
+        if (submenu) {
+            setCurrentMenu(submenu);
+        } else if (menu) {
+            setCurrentMenu(menu);
+        }
+    }, []);
+
     useEffect(() => {
         const fetchMenuContent = async () => {
             try {
@@ -62,26 +71,11 @@ const ArticleContent = ({ menu, submenu }) => {
             </section>
             <section className="w-full min-h-[400px] flex justify-center items-center absolute top-0 z-10">
                 <div className="container flex flex-col gap-2 mx-auto px-6 2xl:px-0 xl:max-w-7xl relative pt-24 pb-40 z-10">
-                    <p className="text-md font-semibold text-white">
-                        {/* {new Date(articleData.published_at).toLocaleDateString(
-                            "id-ID",
-                            {
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric",
-                            }
-                        )} */}
-                        19 Agustus 2025
-                    </p>
                     <h1 className=" text-3xl md:text-5xl font-bold leading-relaxed text-white">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Fugit, maiores?
+                        {currentMenu.title}
                     </h1>
                     <p className="text-sm line-clamp-2  text-white">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Sit mollitia illum eligendi amet maiores omnis cum
-                        sequi nisi nam. Et dolorum dolorem id eligendi corrupti
-                        ipsam harum recusandae, eveniet accusamus?
+                        {currentMenu.excerpt}
                     </p>
                 </div>
             </section>
