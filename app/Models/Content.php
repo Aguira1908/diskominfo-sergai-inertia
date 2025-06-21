@@ -48,7 +48,7 @@ class Content extends Model
 
     public function submenu(): BelongsTo
     {
-        return $this->belongsTo(Submenu::class, 'sub_menu_id');
+        return $this->belongsTo(SubMenu::class, 'sub_menu_id');
     }
 
     // public function submenu(): BelongsTo

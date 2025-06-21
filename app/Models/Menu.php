@@ -13,7 +13,7 @@ class Menu extends Model
 
     public function submenus(): HasMany
     {
-        return $this->hasMany(Submenu::class);
+        return $this->hasMany(SubMenu::class);
     }
 
     public function contents(): HasMany

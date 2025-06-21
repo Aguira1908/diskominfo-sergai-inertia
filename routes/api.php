@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\NewsCategoryController;
 use App\Http\Controllers\Api\ConfigurationController;
 use App\Http\Controllers\Api\ContentController;
-use App\Http\Controllers\APi\FeaturedProgramController;
+use App\Http\Controllers\Api\FeaturedProgramController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
