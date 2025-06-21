@@ -1,13 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-    Facebook,
-    ScreenShare,
-    Calendar,
-    PenLine,
-    ArrowRight,
-    ArrowLeft,
-    CalendarX2,
-} from "lucide-react";
+import { Facebook } from "lucide-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -117,7 +109,8 @@ const HeroSection = ({}) => {
                             {config.information}
                         </p>
 
-                        <ul className="flex w-full md:w-[fit-content] max-w-xl mt-4 justify-between md:justify-center gap-6 md:mt-0 md:absolute md:h-[740px] md:top-0 md:right-6 md:flex-col">
+                        {/* Development */}
+                        {/* <ul className="flex justify-between  w-full md:w-[fit-content] max-w-xl mt-4 md:justify-center gap-6 md:mt-0 md:absolute md:h-[740px] md:top-0 md:right-6 md:flex-col">
                             <a
                                 href="#"
                                 className="bg-gray-200/10 rounded-xl flex justify-center items-center p-3"
@@ -133,7 +126,7 @@ const HeroSection = ({}) => {
                                     <Facebook className="opacity-50 " />
                                 </div>
                             </a>
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
             </section>

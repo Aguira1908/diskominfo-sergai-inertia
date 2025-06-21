@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ScreenShare } from "lucide-react";
 
 import Modal from "./Modal";
 
@@ -36,9 +37,8 @@ const EventList = ({ events }) => {
                                             <span> | </span>
                                             <span>{event.location}</span>
                                         </div>
-                                        <img
-                                            src="#"
-                                            className="w-[13px] h-auto hidden group-hover:block"
+                                        <ScreenShare
+                                            className="w-[13px] h-auto hidden group-hover:block text-blue-700 transition-colors duration-500"
                                             alt="Buka Berita"
                                             aria-hidden="true"
                                         />
