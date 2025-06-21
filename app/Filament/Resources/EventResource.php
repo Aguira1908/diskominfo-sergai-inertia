@@ -108,7 +108,7 @@ class EventResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->slideOver(),
-                Tables\ACtions\ViewAction::make()->slideOver(),
+                Tables\Actions\ViewAction::make()->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
