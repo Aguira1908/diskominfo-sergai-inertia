@@ -123,17 +123,6 @@ const AgendaSection = () => {
                                     </SwiperSlide>
                                 );
                             })}
-
-                            {/* <SwiperSlide>
-                                <div className="group cursor-pointer flex flex-col justify-center items-center py-2 px-2 w-fit  rounded transition-colors ease-in-out duration-250 ">
-                                    <div className="uppercase text-[10px]  ">
-                                        hari
-                                    </div>
-                                    <div className="font-medium text-sm ">
-                                        tanggal
-                                    </div>
-                                </div>
-                            </SwiperSlide> */}
                         </Swiper>
                         <div className="custom-prev   absolute left-2 top-1/2 -translate-y-1/2 z-10 ">
                             <ArrowLeft className="w-6 h-6" />
