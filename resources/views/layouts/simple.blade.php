@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ 'Login' }} - {{ config('app.name') }}</title>
+        @livewireStyles
 
         {{-- <style>
             [x-cloak] { display: none !important; }
@@ -40,11 +41,18 @@
                 
             </div>
     
-            <div class="hidden md:block" >
-                <img src="/images/login-hero.webp" class=" w-full h-full  top-0 object-cover object-center" alt="">
+            <div class="hidden md:block relative w-full h-full">
+                <!-- Gambar latar belakang -->
+                <img src="/images/diskominfo-sergai.webp" class="w-full h-full object-cover object-center absolute inset-0 z-0" alt="">
+            
+                <!-- Overlay Gradient -->
+                <div class="absolute inset-0 z-10 " style="background: radial-gradient(100% 820.78% at 0% 0%, rgba(0, 60, 150, 0.675) 0%, rgba(4, 36, 84, 0.5625) 61.62%);"></div>
             </div>
+            
         </div>
         <!-- Load Filament scripts -->
+        {{-- @livewireScripts --}}
         @filamentScripts
+
     </body>
 </html>
