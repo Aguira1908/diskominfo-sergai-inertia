@@ -29,7 +29,7 @@ const HeroNewsSection = () => {
         fetchNews({ latestPerCategory: true });
     }, [fetchNews]);
 
-    const newsPerCategory = newsData || [];
+    // const newsPerCategory = newsData || [];
     return (
         <div className="h-[700px] bg-gray-800 ">
             <Swiper
@@ -45,7 +45,7 @@ const HeroNewsSection = () => {
                 modules={[EffectFade, Autoplay]}
                 className="mySwiper relative w-full h-full overflow-hidden"
             >
-                {newsPerCategory.map((news, index) => {
+                {newsData?.map((news, index) => {
                     if (!news) return null; // Handle jika tidak ada berita
 
                     return (
@@ -55,19 +55,19 @@ const HeroNewsSection = () => {
                                     src={news.image_url}
                                     loading="lazy"
                                     alt="image"
-                                    className="w-full h-full absolute top-0 object-cover object-center"
+                                    className="w-full h-full absolute pointer-events-none top-0 object-cover object-center"
                                     width={1920}
                                     height={740}
                                 />
                                 <div
-                                    className="w-full h-full absolute top-0"
+                                    className="w-full h-full absolute top-0  pointer-events-none"
                                     style={{
                                         background:
                                             "radial-gradient(56.33% 56.33% at 50.59% 43.67%, rgba(0, 23, 28, 0.5) 0%, rgba(0, 11, 14, 0.7) 46.15%, rgba(0, 11, 14, 0.82) 100%)",
                                     }}
                                 ></div>
                             </div>
-                            <div className="absolute w-full bottom-0 text-white ">
+                            <div className="absolute w-full bottom-0 text-white  ">
                                 <div className="text-white container mx-auto px-6 2xl:px-0 xl:max-w-7xl grid grid-cols-1 md:grid-cols-5 gap-1">
                                     <div className="div1 md:col-span-4 px-0  md:p-4 rounded-lg">
                                         <span className="text-sm md:text-xl md:p-0 font-semibold ">
@@ -133,7 +133,7 @@ const HeroNewsSection = () => {
                                                 <p className="text-sm">
                                                     <span className="text-gray-300 ">
                                                         {index + 1} dari{" "}
-                                                        {newsPerCategory.length}
+                                                        {newsData.length}
                                                     </span>
                                                 </p>
                                                 <button
