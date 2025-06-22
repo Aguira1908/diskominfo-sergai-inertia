@@ -9,35 +9,31 @@ const QuickAccess = () => {
                         Akses Cepat
                     </h2>
                     <p className="text-center lg:text-left text-sm text-gray-600 leading-6">
-                        Dapatkan kemudahaan akses ke beberapa layanan Pemerintah
-                        Provinsi Jawa Barat untuk kebutuhan Anda.
+                        Dapatkan layanan dari Pemerintah Kabupaten Serdang
+                        Bedagai dengan lebih mudah dan cepat sesuai keperluan
+                        Anda.
                     </p>
                 </li>
                 <li className="group p-6 rounded-xl border border-gray-200 shadow-xl shadow-gray-200  bg-gray-50 hover:bg-blue-50 transition-colors ease-in-out duration-250">
-                    <a
-                        href="#"
-                        className="flex flex-col gap-4"
-                        aria-label={`Buka `}
-                    >
-                        <img
+                    <div className="flex flex-col gap-4" aria-label={`Buka `}>
+                        {/* <img
                             src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
                             alt="gambar"
                             loading="lazy"
                             className="lazy-img w-fit h-10"
-                        />
+                        /> */}
 
-                        <p className="font-roboto font-bold group-hover:text-blue-700">
+                        <h1 className="text-xl font-roboto font-bold group-hover:text-blue-700">
                             PPID
-                        </p>
+                        </h1>
                         <p className="text-sm text-gray-600 leading-6 group-hover:text-blue-gray-800 focus:outline-none">
-                            Ajukan permohonan informasi kepada Pejabat Pengelola
-                            Informasi dan Dokumentasi untuk mendapatkan
-                            informasi terkini dan terakurat seputar Diskominfo
-                            Jawa Barat
+                            Sampaikan permohonan informasi Anda kepada PPID
+                            untuk memperoleh data terbaru dan terpercaya dari
+                            Diskominfo Kabupaten Serdang Bedagai.
                         </p>
-                    </a>
+                    </div>
                 </li>
-                <li className="group p-6 rounded-xl border border-gray-200 shadow-xl shadow-gray-200  bg-gray-50 hover:bg-blue-50 transition-colors ease-in-out duration-250">
+                {/* <li className="group p-6 rounded-xl border border-gray-200 shadow-xl shadow-gray-200  bg-gray-50 hover:bg-blue-50 transition-colors ease-in-out duration-250">
                     <a
                         href="#"
                         className="flex flex-col gap-4"
@@ -80,7 +76,7 @@ const QuickAccess = () => {
                             Akses berbagai layanan Diskominfo Jabar.
                         </p>
                     </a>
-                </li>
+                </li> */}
             </ul>
         </div>
     );
