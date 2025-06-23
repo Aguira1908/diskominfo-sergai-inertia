@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -39,10 +40,16 @@ class NewsSummariesResource extends Resource
                     ->required()
                     ->disabled(),
 
-                Forms\Components\Textarea::make('summary')
-                    ->rows(15)
-                    ->columnSpanFull()
-                    ->disabled(),
+
+                Forms\Components\Section::make('Content')
+                    ->schema([
+                        TiptapEditor::make('summary')
+                            ->profile('default')
+                        // ->rows(15)
+                        // ->columnSpanFull()
+                        // ->disabled(),
+                    ])
+
             ]);
     }
 
@@ -74,7 +81,8 @@ class NewsSummariesResource extends Resource
                     ]),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()->slideOver(),
+                // Tables\Actions\ViewAction::make()->slideOver(),
+                Tables\Actions\EditAction::make()->slideOver(),
                 Tables\Actions\DeleteAction::make()->slideOver(),
             ])
             ->bulkActions([
@@ -95,10 +103,10 @@ class NewsSummariesResource extends Resource
     {
         return [
             'index' => Pages\ListNewsSummaries::route('/'),
-            'view' => Pages\ListNewsSummaries::route('/{record}'),
+            // 'view' => Pages\ListNewsSummaries::route('/{record}'),
 
             // 'create' => Pages\CreateNewsSummaries::route('/create'),
-            // 'edit' => Pages\EditNewsSummaries::route('/{record}/edit'),
+            'edit' => Pages\EditNewsSummaries::route('/{record}/edit'),
         ];
     }
 }
