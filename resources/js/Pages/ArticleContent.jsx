@@ -52,7 +52,7 @@ const ArticleContent = ({ menu, submenu }) => {
                 <div className="relative w-full h-full overflow-hidden">
                     <div>
                         <img
-                            src="#"
+                            src="/images/diskominfo-sergai.webp"
                             className="w-full h-full absolute top-0 object-cover object-center"
                             alt="berita diskominfo "
                             loading={"lazy"}
@@ -61,9 +61,13 @@ const ArticleContent = ({ menu, submenu }) => {
                         />
                         <div
                             className="w-full h-full absolute top-0"
+                            // style={{
+                            //     background:
+                            //         "radial-gradient(100% 820.78% at 0% 0%, rgba(0, 60, 150, 0.675) 0%, rgba(4, 36, 84, 0.5625) 61.62%)",
+                            // }}
                             style={{
                                 background:
-                                    "radial-gradient(100% 820.78% at 0% 0%, rgba(0, 60, 150, 0.675) 0%, rgba(4, 36, 84, 0.5625) 61.62%)",
+                                    "radial-gradient(56.33% 56.33% at 50.59% 43.67%, rgba(0, 23, 28, 0.5) 0%, rgba(0, 11, 14, 0.7) 46.15%, rgba(0, 11, 14, 0.82) 100%)",
                             }}
                         ></div>
                     </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\NewsCategoryController;
 use App\Http\Controllers\Api\ConfigurationController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\FeaturedProgramController;
+use App\Http\Controllers\APi\NewsSummarizeController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -36,3 +37,7 @@ Route::get('/contents/{slug}', [ContentController::class, 'show']);
 // routes/api.php
 Route::get('/news', [NewsController::class, 'index']);
 Route::get('/news/{slug}', [NewsController::class, 'show']);
+
+//Route Api Sum
+Route::get('/summarize', [NewsSummarizeController::class, 'index']);
+Route::get('/summarize/{id}', [NewsSummarizeController::class, 'show']);
