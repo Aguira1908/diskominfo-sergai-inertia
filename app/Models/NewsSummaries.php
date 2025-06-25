@@ -10,6 +10,8 @@ class NewsSummaries extends Model
         'period_type',
         'start_date',
         'end_date',
+        'status',
+        'error_message',
         'summary'
     ];
 }
