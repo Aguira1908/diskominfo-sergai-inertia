@@ -15,11 +15,12 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $query = News::with([
-            'category' => function ($q) {
-                $q->select('id', 'name', 'slug');
-            }
-        ])
+        $query = News::where('is_active', true)
+            ->with([
+                'category' => function ($q) {
+                    $q->select('id', 'name', 'slug');
+                }
+            ])
             ->select([
                 'id',
                 'title',

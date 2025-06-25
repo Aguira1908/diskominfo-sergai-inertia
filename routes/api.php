@@ -38,4 +38,6 @@ Route::get('/contents/{slug}', [ContentController::class, 'show']);
 Route::get('/news', [NewsController::class, 'index']);
 Route::get('/news/{slug}', [NewsController::class, 'show']);
 
-Route::get('/news-sum', [NewsSummarizeController::class, 'index']);
+//Route Api Sum
+Route::get('/summarize', [NewsSummarizeController::class, 'index']);
+Route::get('/summarize/{id}', [NewsSummarizeController::class, 'show']);

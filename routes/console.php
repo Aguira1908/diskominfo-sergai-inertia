@@ -13,9 +13,4 @@ Artisan::command('inspire', function () {
 Artisan::command('summary:trigger-weekly', function () {
     $this->call('app:summarize-weekly-command'); // ini adalah signature dari command class
     $this->info('Command summarize:weekly telah dijalankan via console.php');
-});// Artisan::command('summarize:weekly', function () {
-//     SummarizeNewsJob::dispatch();
-//     $this->info('Job SummarizeNewsJob berhasil dikirim ke queue.');
-// });
-
-// Artisan::command(SummarizeNewsJob::class)->weekly();
+})->weekly();

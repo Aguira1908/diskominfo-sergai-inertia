@@ -36,13 +36,25 @@ class SummarizeWeeklyCommand extends Command
     {
         try {
             $periodType = 'weekly';
-            $startDate = Carbon::now()->startOfWeek();
-            $endDate = Carbon::now()->endOfWeek();
+            // $startDate = Carbon::now()->startOfWeek();
+            // $endDate = Carbon::now()->endOfWeek();
+            $startDate = Carbon::now()->subWeek()->startOfWeek(); // Senin minggu lalu
+            $endDate = Carbon::now()->subWeek()->endOfWeek();     // Minggu minggu lalu
 
-            $newsContents = News::whereNotNull('published_at')
-                ->whereBetween('published_at', [Carbon::now()->subWeek(), Carbon::now()])
+            $newsContents = News::where('is_active', true)
+                ->whereNotNull('published_at')
+                ->whereBetween('published_at', [$startDate, $endDate])
                 ->take(100) // opsional, batas aman
                 ->pluck('content');
+
+            Log::info('Jumlah berita ditemukan: ' . $newsContents->count());
+            Log::info('Tanggal minggu ini:', [
+                'start' => $startDate->toDateString(),
+                'end' => $endDate->toDateString(),
+            ]);
+
+            News::whereBetween('published_at', [$startDate, $endDate])
+                ->pluck('published_at')->toArray();
 
             $allContents = $newsContents->implode("\n\n");
 
@@ -51,22 +63,27 @@ class SummarizeWeeklyCommand extends Command
                 $this->warn('Tidak ada konten berita untuk diringkas.');
                 return;
             }
-
             $content = <<<PROMPT
-Anda adalah asisten AI profesional yang membuat ringkasan berita dalam Bahasa Indonesia yang baik dan benar. 
-Tugas Anda adalah menyajikan ringkasan yang mudah dipahami oleh pembaca awam, menggunakan gaya bahasa naratif, bukan berupa poin-poin. 
-Fokuskan ringkasan pada highlight utama: siapa, apa, kapan, mengapa, dan dampaknya terhadap masyarakat. 
-Jika ada kutipan tokoh atau reaksi manusiawi, ringkaslah dengan alami dan ringkas.
-
-Pastikan:
-- Gunakan maksimal 100 kata per paragraf.
-- Struktur HTML harus dipertahankan: setiap <h1> diikuti satu <p> berisi ringkasan.
-- Jangan ubah atau hilangkan tag HTML.
-- Gunakan Bahasa Indonesia baku yang jelas dan mudah dimengerti oleh masyarakat umum.
-
-Berikut ini adalah isi berita yang akan diringkas:
-$allContents
-PROMPT;
+            Tugas Anda adalah membuat ringkasan berita **abstraktif** dari input dalam format HTML.
+            
+            🎯 Tujuan:
+            - Ringkasan harus **singkat (maksimal 200 kata)**, **mudah dipahami pembaca awam**, dan menggunakan **Bahasa Indonesia yang baik dan benar**.
+            - Gunakan gaya **naratif** (bukan poin-poin).
+            - Hanya tulis satu paragraf untuk setiap berita.
+            
+            🧱 Aturan Struktur:
+            - **Pertahankan struktur HTML**: setiap <h1> harus diikuti tepat satu <p>.
+            - Jangan menggandakan <h1>, jangan ulangi <h1> dalam bentuk plain text.
+            - Jangan menambahkan elemen HTML baru. Jangan mengubah urutan.
+            - Tidak perlu menyebut tanggal secara eksplisit kecuali penting.
+            
+            📌 Contoh output yang BENAR:
+            <h1>Judul Berita</h1>
+            <p>Ringkasan dalam 1 paragraf naratif (maks. 200 kata)...</p>
+            
+            Berikut isi beritanya:
+            $allContents
+            PROMPT;
 
             $chatData = new ChatData(
                 messages: [

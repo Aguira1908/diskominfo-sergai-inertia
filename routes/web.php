@@ -12,10 +12,15 @@ Route::get('/', function () {
 Route::get('/berita', function () {
     return Inertia::render('Berita');
 });
+
 Route::get('/berita/{slug}', function ($slug) {
     return Inertia::render('Article', [
         'slug' => $slug
     ]);
+});
+
+Route::get('/summarize', function () {
+    return Inertia::render('ArticleNewsSum');
 });
 
 // Routing dinamis untuk menu dan submenu

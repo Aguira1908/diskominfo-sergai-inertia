@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\APi;
 
-use App\Http\Controllers\Controller;
-use App\Models\NewsSummaries;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\NewsSummaries;
+use App\Http\Controllers\Controller;
 
 class NewsSummarizeController extends Controller
 {
@@ -13,7 +14,11 @@ class NewsSummarizeController extends Controller
      */
     public function index()
     {
-        $newsSum = NewsSummaries::get();
+        $startDate = Carbon::now()->subWeek(); // 7 hari terakhir
+        $endDate = Carbon::now();
+
+        $newsSum = NewsSummaries::whereBetween('created_at', [$startDate, $endDate])->get(["id", "period_type", "start_date", "end_date", "summary"]);
+
 
         if (!$newsSum) {
             return response()->json([
@@ -21,7 +26,7 @@ class NewsSummarizeController extends Controller
                 'message' => 'Program tidak ditemukan.',
             ], 404);
         }
-        return response()->json($newsSum);
+        return response($newsSum);
     }
 
     /**
@@ -37,7 +42,16 @@ class NewsSummarizeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $newsSum = NewsSummaries::find($id);
+
+
+        if (!$newsSum) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Program tidak ditemukan.',
+            ], 404);
+        }
+        return response()->json($newsSum);
     }
 
     /**

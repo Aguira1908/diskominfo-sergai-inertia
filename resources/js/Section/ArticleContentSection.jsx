@@ -8,7 +8,6 @@ import { Mousewheel } from "swiper/modules";
 import useArticleContentStore from "../Global/useArticleContentStore";
 
 const ArticleContentSection = ({ slug }) => {
-    const [article, setArticle] = useState([]);
     const { contentData, isLoading, error, fetchArticleContent, reset } =
         useArticleContentStore();
 

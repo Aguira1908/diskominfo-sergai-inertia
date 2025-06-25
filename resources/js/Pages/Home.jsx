@@ -54,8 +54,8 @@ const Home = () => {
                                     </div>
                                 </a>
                                 {/* Proses Develop */}
-                                {/* <a
-                                    href="/berita"
+                                <a
+                                    href={`/summarize`}
                                     aria-label="Lihat Semua Berita"
                                     className=""
                                 >
@@ -67,7 +67,7 @@ const Home = () => {
                                             <Newspaper className="w-3 h-auto " />
                                         </div>
                                     </div>
-                                </a> */}
+                                </a>
                             </div>
                             {/* Berita */}
                             <div className="w-full grid grid-cols-1 gap-8 md:grid-rows-1 lg:grid-cols-[1fr_330px]">
