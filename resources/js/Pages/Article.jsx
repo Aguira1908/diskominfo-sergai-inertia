@@ -25,9 +25,13 @@ const Article = ({ slug }) => {
                         />
                         <div
                             className="w-full h-full absolute top-0"
+                            // style={{
+                            //     background:
+                            //         "radial-gradient(100% 820.78% at 0% 0%, rgba(0, 60, 150, 0.675) 0%, rgba(4, 36, 84, 0.5625) 61.62%)",
+                            // }}
                             style={{
                                 background:
-                                    "radial-gradient(100% 820.78% at 0% 0%, rgba(0, 60, 150, 0.675) 0%, rgba(4, 36, 84, 0.5625) 61.62%)",
+                                    "radial-gradient(56.33% 56.33% at 50.59% 43.67%, rgba(0, 23, 28, 0.5) 0%, rgba(0, 11, 14, 0.7) 46.15%, rgba(0, 11, 14, 0.82) 100%)",
                             }}
                         ></div>
                     </div>
@@ -57,7 +61,7 @@ const Article = ({ slug }) => {
                 <div className="container mx-auto px-6 2xl:px-0 xl:max-w-4xl relative -top-24 z-10">
                     <div className="p-3  md:p-4 lg:py-8 lg:px-10 rounded-xl shadow-xl bg-white min-h-[calc(100vh-300px)] w-full">
                         <div className="mx-auto prose lg:prose-xl ">
-                            {/* {isLoading && <h1>Memuat...</h1>} */}
+                            {isLoading && <h1 className="">Memuat...</h1>}
 
                             <article
                                 className="prose  prose-zinc    prose-p:leading-7 prose-img:rounded-lg mx-auto max-w-full"
