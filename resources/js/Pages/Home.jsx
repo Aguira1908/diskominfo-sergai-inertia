@@ -98,8 +98,8 @@ const Home = () => {
                                     Agenda Diskominfo Serdang Bedagai
                                 </h2>
                                 <p className="text-xs">
-                                    Dapatkan informasi terkait semua kegiatan
-                                    yang dilakukan di Jawa Barat.
+                                    Ikuti berbagai aktivitas dan agenda resmi
+                                    yang berlangsung di Kabupaten Sergai.
                                 </p>
                             </div>
                             <AgendaSection />
