@@ -16,7 +16,6 @@ const AllNewsSection = ({ currentCategory, curPage, seeMore }) => {
     }, [fetchNews, currentCategory, curPage, seeMore]);
 
     const currentNews = newsData || [];
-    console.log(currentNews);
     return (
         <ul>
             {currentNews.map((News, index) => (

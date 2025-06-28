@@ -5,7 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class event extends Model
+class Event extends Model
 {
     protected $fillable = [
         'title',

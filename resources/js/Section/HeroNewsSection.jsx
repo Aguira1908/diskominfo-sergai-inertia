@@ -46,7 +46,7 @@ const HeroNewsSection = () => {
                 className="mySwiper relative w-full h-full overflow-hidden"
             >
                 {newsData?.map((news, index) => {
-                    if (!news) return null; // Handle jika tidak ada berita
+                    // if (!news) return null; // Handle jika tidak ada berita
 
                     return (
                         <SwiperSlide key={index}>
