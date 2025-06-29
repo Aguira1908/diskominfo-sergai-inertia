@@ -32,7 +32,7 @@ const Footer = () => {
                                 alt="Logo Diskominfo"
                             />
                         </a>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-2">
                             <p class="font-bold leading-7">
                                 DINAS KOMUNIKASI DAN INFORMATIKA
                             </p>
@@ -51,53 +51,77 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="flex items-start gap-3 ">
-                        <Phone className="w-8 opacity-60 mt-2" />
+                        {/* <Phone className="w-8 opacity-60 mt-2" /> */}
                         <div className="flex flex-col gap-1">
-                            <span className="font-bold leading-7">Telepon</span>
-                            <span className="font-roboto leading-7">
+                            <span className="font-bold leading-7 text-lg p-2">
+                                Telepon
+                            </span>
+                            <span className="font-roboto leading-7 p-2">
                                 {configData.telephone || "-"}
                             </span>
                         </div>
                     </div>
-                    <div className="flex items-start gap-3 ">
-                        <Mail className="w-8 opacity-60 mt-2" />
+                    <div className="flex items-start gap-3 text-gray-700">
+                        {/* <Mail className="w-8 opacity-60 mt-2" /> */}
                         <div className="flex flex-col gap-1">
-                            <span className="font-bold leading-7">E-Mail</span>
-                            <span className="font-roboto leading-7">
+                            <span className="font-bold leading-7 text-lg p-2">
+                                E-Mail
+                            </span>
+                            <span className="font-roboto leading-7 p-2">
                                 {configData.email || "-"}
                             </span>
                         </div>
                     </div>
-                    <div className="flex items-start gap-3 ">
-                        <Globe className="w-8 opacity-60 mt-2" />
+                    <div className="flex items-start gap-3 w-[220px] ">
+                        {/* <Globe className="w-8 opacity-60 mt-2" /> */}
                         <div className="flex flex-col gap-3 w-full">
-                            <span className="text-gray-700 font-bold opacity-90 mb-4">
+                            <span className="text-gray-700 text-lg p-2 font-bold opacity-90 md:mb-4">
                                 Media Sosial
                             </span>
-                            <span className="flex  text-white justify-between px-2 md:justify-start md:gap-8">
+                            <span className="flex flex-col gap-3 text-white justify-between md:justify-start md:gap-4">
                                 <a
+                                    className="flex items-center gap-3 hover:bg-gray-200 p-2 rounded-lg"
                                     href="https://www.facebook.com/diskominfo.serdangbedagaikab"
-                                    className="p-[5px] flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-600"
                                 >
-                                    <Facebook />
+                                    <div className="p-[5px] flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-600">
+                                        <Facebook />
+                                    </div>
+                                    <span className="text-gray-900">
+                                        Facebook
+                                    </span>
                                 </a>
                                 <a
+                                    className="flex items-center gap-3   hover:bg-gray-200 p-2 rounded-lg"
                                     href="https://www.instagram.com/diskominfoserdangbedagai/"
-                                    className="p-[5px] flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-600"
                                 >
-                                    <Instagram />
+                                    <div className="p-[5px] flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-600">
+                                        <Instagram />
+                                    </div>
+                                    <span className="text-gray-900">
+                                        Instagram
+                                    </span>
                                 </a>
                                 <a
+                                    className="flex items-center gap-3  hover:bg-gray-200 p-2 rounded-lg "
                                     href="https://www.youtube.com/@mediacentersergai7087"
-                                    className="p-[5px] flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-600"
                                 >
-                                    <Youtube />
+                                    <div className="p-[5px] flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-600">
+                                        <Youtube />
+                                    </div>
+                                    <span className="text-gray-900">
+                                        Youtube
+                                    </span>
                                 </a>
                                 <a
+                                    className="flex items-center gap-3 hover:bg-gray-200 p-2 rounded-lg "
                                     href="https://sergaifm.serdangbedagaikab.go.id/"
-                                    className="p-[5px] flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-600"
                                 >
-                                    <Music />
+                                    <div className="p-[5px] flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-600">
+                                        <Music />
+                                    </div>
+                                    <span className="text-gray-900">
+                                        Sergai FM
+                                    </span>
                                 </a>
                             </span>
                         </div>
