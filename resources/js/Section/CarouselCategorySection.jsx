@@ -38,8 +38,8 @@ const CarouselCategorySection = ({ categoryHandler, activeCategory }) => {
                 ]);
                 // const apiData = response?.data || [];
 
-                const localCategories = localRes.data || [];
-                const mediaCategories = (mediaRes.data || []).map((cat) => ({
+                const localCategories = localRes?.data || [];
+                const mediaCategories = (mediaRes?.data || []).map((cat) => ({
                     id: `media-${cat.id}`, // beri prefix agar tidak konflik dengan id lokal
                     name: cat.name,
                     slug: cat.slug,
