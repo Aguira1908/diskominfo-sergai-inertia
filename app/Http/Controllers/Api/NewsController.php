@@ -40,9 +40,14 @@ class NewsController extends Controller
         // Filter berita terbaru per kategori
         if ($request->boolean('latest_per_category')) {
             $query->whereIn('id', function ($subquery) {
-                $subquery->selectRaw('MAX(id)')
-                    ->from('news')
-                    ->groupBy('category_id');
+                $subquery->selectRaw('id')
+                    ->from('news as n1')
+                    ->whereRaw('n1.id = (
+                SELECT n2.id FROM news n2
+                WHERE n2.category_id = n1.category_id AND n2.is_active = true
+                ORDER BY n2.published_at DESC
+                LIMIT 1
+            )');
             });
         }
         // Filter berdasarkan kategori (slug)
