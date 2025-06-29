@@ -27,13 +27,35 @@ const CarouselCategorySection = ({ categoryHandler, activeCategory }) => {
     useEffect(() => {
         const fetchCategoryNews = async () => {
             try {
-                const response = await axios.get("api/news-category");
-                const apiData = response?.data || [];
+                // const localRes = await axios.get("api/news-category");
+                // const mediaRes = await axios.get(
+                //     `https://cors-anywhere.herokuapp.com/https://mediacenter.serdangbedagaikab.go.id/wp-json/wp/v2/categories`
+                // );
+
+                const [localRes, mediaRes] = await Promise.all([
+                    axios.get("/api/news-category"), // local DB
+                    axios.get("/proxy/categories"), // WordPress
+                ]);
+                // const apiData = response?.data || [];
+
+                const localCategories = localRes.data || [];
+                const mediaCategories = (mediaRes.data || []).map((cat) => ({
+                    id: `media-${cat.id}`, // beri prefix agar tidak konflik dengan id lokal
+                    name: cat.name,
+                    slug: cat.slug,
+                    source: "mediacenter",
+                }));
 
                 setCategory([
                     { id: "all", name: "Semuanya", slug: false },
-                    ...apiData,
+                    ...localCategories,
+                    ...mediaCategories,
                 ]);
+
+                // setCategory([
+                //     { id: "all", name: "Semuanya", slug: false },
+                //     ...apiData,
+                // ]);
             } catch (err) {
                 console.log("Failed to fetch category", err);
             }
@@ -55,8 +77,8 @@ const CarouselCategorySection = ({ categoryHandler, activeCategory }) => {
             }}
         >
             {/* proses develop */}
-            <SwiperSlide className="!w-auto">
-                {/* Proses Develop */}
+            {/* <SwiperSlide className="!w-auto">
+                Proses Develop
                 <a
                     href={`/summarize`}
                     aria-label="Lihat Semua Berita"
@@ -69,7 +91,7 @@ const CarouselCategorySection = ({ categoryHandler, activeCategory }) => {
                         </div>
                     </div>
                 </a>
-                {/* <li
+                <li
                     className={
                         "relative min-w-fit h-10 px-4 flex gap-4 items-center justify-between group border-2 rounded-full border-blue-500 text-blue-500"
                     }
@@ -79,8 +101,8 @@ const CarouselCategorySection = ({ categoryHandler, activeCategory }) => {
                             Ringkasan
                         </span>
                     </Link>
-                </li> */}
-            </SwiperSlide>
+                </li>
+            </SwiperSlide> */}
             {category.map((cat, index) => {
                 return (
                     <SwiperSlide className="!w-auto" key={index}>
