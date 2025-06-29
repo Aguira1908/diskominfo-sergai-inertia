@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\Menu;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MenuController;
-use App\Models\Menu;
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -21,6 +22,10 @@ Route::get('/berita/{slug}', function ($slug) {
 
 Route::get('/summarize', function () {
     return Inertia::render('ArticleNewsSum');
+});
+Route::get('/proxy/categories', function () {
+    $response = Http::withoutVerifying()->get('https://mediacenter.serdangbedagaikab.go.id/wp-json/wp/v2/categories');
+    return $response->json();
 });
 
 // Routing dinamis untuk menu dan submenu
@@ -58,5 +63,5 @@ Route::get('/{menuSlug}/{submenuSlug?}', function ($menuSlug, $submenuSlug = nul
 // Route::get('/profil', function () {
 //     return Inertia::render('ArticleContent');
 // });
-
+// routes/web.php
 
