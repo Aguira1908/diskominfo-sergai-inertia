@@ -28,7 +28,7 @@ const useNewsStore = create((set) => ({
                     ...(category && { category }),
                 },
             });
-            console.log(response?.data?.data);
+            // console.log(response?.data?.data);
             set({
                 newsData: response?.data?.data || [],
                 meta: response?.data?.meta || {},

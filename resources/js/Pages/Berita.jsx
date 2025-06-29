@@ -59,10 +59,10 @@ const Berita = () => {
                     <div className="w-full shadow-xl h-full p-4 md:px-8 bg-white rounded-xl  grid grid-cols-1  xl:grid-cols-[1fr,315px] gap-6">
                         {/* Latest News By Category */}
                         <div className="flex flex-col">
-                            <h1 className="font-bold text-4xl py-2 text-gray-700">
+                            <h1 className="font-bold text-4xl py-2 text-gray-700 mb-8">
                                 Berita Serdang Bedagai
                             </h1>
-                            <div className="relative flex justify-center mb-5 border-b-2 border-gray-200">
+                            <div className="relative flex justify-center mb-5  border-gray-200">
                                 {/* Blur Effect Kiri */}
                                 <div className="absolute left-0 md:-left-4 top-0 h-full  w-3 md:w-8 bg-gradient-to-r from-white via-white/80 to-transparent backdrop-blur-sm z-10 pointer-events-none" />
 
@@ -74,6 +74,7 @@ const Berita = () => {
                                     activeCategory={category}
                                 />
                             </div>
+                            <span className="border-1 border-gray-500/50"></span>
                         </div>
                         <section className="w-full h-full grid grid-cols-1 xl:grid-cols-[1fr_330px] gap-4 md:gap-10">
                             {/* Card News */}
