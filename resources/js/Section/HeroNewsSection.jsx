@@ -38,7 +38,7 @@ const HeroNewsSection = () => {
                     allowTouchMove={false}
                     effect={"fade"}
                     modules={[EffectFade, Autoplay]}
-                    className="mySwiper relative w-full h-full overflow-hidden bg-blue-500"
+                    className="mySwiper relative w-full h-full overflow-hidden"
                 >
                     {newsHero?.map((news, index) => (
                         <SwiperSlide key={news.id}>

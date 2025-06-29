@@ -10,10 +10,11 @@ const useNewsHero = create((set) => ({
         set({ isLoading: true, error: null });
 
         try {
-            const [localRes, mediaRes] = await Promise.all([
-                axios.get("/api/news?latest_per_category=true"), //Local
-                axios.get("/proxy/posts-latest-by-category"),
-            ]);
+            const localRes = await axios.get(
+                "/api/news?latest_per_category=true"
+            ); //Local
+            const mediaRes = await axios.get("/proxy/posts-latest-by-category");
+
             const localLatest = (localRes?.data?.data || []).map((item) => ({
                 id: `local-${item.id}`,
                 source: "local",
