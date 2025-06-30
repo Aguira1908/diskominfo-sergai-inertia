@@ -100,13 +100,13 @@ const SeeMore = ({
                     <div className="flex w-full gap-2">
                         <button
                             onClick={() => handlePageChange(currentPage - 1)}
-                            className="px-3 py-2 text-sm font-medium text-gray-700"
+                            className="px-3 cursor-pointer py-2 text-sm font-medium text-gray-700"
                         >
                             <ArrowLeft />
                         </button>
                         <button
                             onClick={() => handlePageChange(currentPage + 1)}
-                            className="px-3 py-2 text-sm font-medium text-gray-700"
+                            className="px-3 cursor-pointer py-2 text-sm font-medium text-gray-700"
                         >
                             <ArrowRight />
                         </button>

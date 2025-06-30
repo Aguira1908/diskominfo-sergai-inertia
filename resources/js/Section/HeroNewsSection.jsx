@@ -25,7 +25,18 @@ const HeroNewsSection = () => {
     return (
         <div className="h-[700px] bg-gray-800">
             {isLoading ? (
-                <h1 className="text-white text-center pt-20">Memuat...</h1>
+                <div className="relative w-full h-full overflow-hidden ">
+                    <div></div>
+                    <div className="absolute w-full bottom-0 text-white">
+                        <div className="text-white container mx-auto px-6 2xl:px-0 xl:max-w-7xl grid grid-cols-1 md:grid-cols-5 gap-1">
+                            <div className="md:col-span-5 md:row-span-2 md:row-start-2 p-1 md:py-4 rounded-lg">
+                                <h1 className="text-xl font-extrabold mb-2 line-clamp-2">
+                                    Memuat...
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             ) : (
                 <Swiper
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -38,7 +49,7 @@ const HeroNewsSection = () => {
                     allowTouchMove={false}
                     effect={"fade"}
                     modules={[EffectFade, Autoplay]}
-                    className="mySwiper relative w-full h-full overflow-hidden"
+                    className="mySwiper relative w-full h-full overflow-hidden "
                 >
                     {newsHero?.map((news, index) => (
                         <SwiperSlide key={news.id}>
@@ -47,7 +58,7 @@ const HeroNewsSection = () => {
                                     src={news.thumbnail || news.image_url}
                                     loading="lazy"
                                     alt="image"
-                                    className="w-full h-full absolute pointer-events-none top-0 object-cover object-center"
+                                    className="w-full h-full absolute pointer-events-none top-0 object-cover object-center bg-black"
                                     width={1920}
                                     height={740}
                                 />
