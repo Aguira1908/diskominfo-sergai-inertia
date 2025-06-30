@@ -49,7 +49,7 @@ const Article = ({ slug }) => {
                             }
                         )}
                     </p>
-                    <h1 className=" text-3xl md:text-5xl font-bold leading-relaxed text-white">
+                    <h1 className="line-clamp-2 text-3xl md:text-5xl font-extrabold leading-relaxed text-white">
                         {articleData.title}
                     </h1>
                     <p className="text-sm line-clamp-2  text-white">
@@ -62,7 +62,19 @@ const Article = ({ slug }) => {
                     <div className="p-3  md:p-4 lg:py-8 lg:px-10 rounded-xl shadow-xl bg-white min-h-[calc(100vh-300px)] w-full">
                         <div className="mx-auto prose lg:prose-xl ">
                             {isLoading && <h1 className="">Memuat...</h1>}
-
+                            <h2 className="text-lg font-extrabold">
+                                {articleData.title}
+                            </h2>
+                            <p className="text-lg">
+                                {" "}
+                                {new Date(
+                                    articleData.published_at
+                                ).toLocaleDateString("id-ID", {
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </p>
                             <article
                                 className="prose  prose-zinc    prose-p:leading-7 prose-img:rounded-lg mx-auto max-w-full"
                                 dangerouslySetInnerHTML={{

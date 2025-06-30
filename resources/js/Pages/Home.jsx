@@ -30,7 +30,7 @@ const Home = () => {
                 <div className=" container mx-auto px-6 2xl:px-0 xl:max-w-7xl">
                     <div className="w-full h-full p-4 md:p-8 bg-white rounded-xl shadow grid grid-cols-1 xl:grid-cols-[1fr_315px] gap-6">
                         {/* section News */}
-                        <section className=" w-full h-full grid grid-cols-1 gap-4 text-slate-700">
+                        <section className=" w-full h-full grid grid-cols-1 gap-1 text-slate-700">
                             {/* Header Berita */}
                             <div className="flex flex-col md:flex-row gap-1 md:gap-4 mb-4 items-center">
                                 <h1 className=" font-medium text-[28px] md:text-4xl">
