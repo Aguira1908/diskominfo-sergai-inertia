@@ -2,17 +2,18 @@
 
 namespace App\Console\Commands;
 
-use Throwable;
-use Carbon\Carbon;
 use App\Models\News;
 use App\Models\NewsSummaries;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use MoeMizrak\LaravelOpenrouter\DTO\ChatData;
 use MoeMizrak\LaravelOpenrouter\DTO\ErrorData;
-use MoeMizrak\LaravelOpenrouter\Types\RoleType;
 use MoeMizrak\LaravelOpenrouter\DTO\MessageData;
 use MoeMizrak\LaravelOpenrouter\Facades\LaravelOpenRouter;
+use MoeMizrak\LaravelOpenrouter\Types\RoleType;
+use Throwable;
 
 class SummarizeWeeklyCommand extends Command
 {
@@ -37,35 +38,31 @@ class SummarizeWeeklyCommand extends Command
     {
         try {
             $periodType = 'weekly';
-            // $startDate = Carbon::now()->startOfWeek();
-            // $endDate = Carbon::now()->endOfWeek();
-            // $startDate = Carbon::now()->subWeek()->startOfWeek(); // Senin minggu lalu
-            // $endDate = Carbon::now()->subWeek()->endOfWeek();     // Minggu minggu lalu
             $startDate = $this->option('start')
                 ? Carbon::parse($this->option('start'))
                 : Carbon::now()->subWeek()->startOfWeek();
-
 
             $endDate = $this->option('end')
                 ? Carbon::parse($this->option('end'))
                 : Carbon::now()->subWeek()->endOfWeek();
 
-            $newsContents = News::where('is_active', true)
+            $localContents = News::where('is_active', true)
                 ->whereNotNull('published_at')
                 ->whereBetween('published_at', [$startDate, $endDate])
-                ->take(20) // opsional, batas aman
-                ->pluck('content');
+                ->take(5)
+                ->get(['title', 'content']);
 
-            Log::info('Jumlah berita ditemukan: ' . $newsContents->count());
-            Log::info('Tanggal minggu ini:', [
-                'start' => $startDate->toDateString(),
-                'end' => $endDate->toDateString(),
-            ]);
+            $mediaCenterContents = $this->fetchMediaCenterNews($startDate, $endDate, 5);
 
-            News::whereBetween('published_at', [$startDate, $endDate])
-                ->pluck('published_at')->toArray();
+            Log::info('Jumlah berita lokal:', ['total' => $localContents->count()]);
+            Log::info('Jumlah berita media center:', ['total' => $mediaCenterContents->count()]);
 
-            $allContents = $newsContents->implode("\n\n");
+            $combined = $localContents->map(fn($item) => [
+                'title' => $item->title,
+                'content' => $item->content,
+            ])->concat($mediaCenterContents);
+
+            $allContents = $combined->map(fn($item) => "<h1>{$item['title']}</h1>\n<p>{$item['content']}</p>")->implode("\n\n");
 
             if (empty($allContents)) {
                 Log::warning('[SummarizeWeeklyCommand] Tidak ada berita ditemukan.');
@@ -112,7 +109,6 @@ class SummarizeWeeklyCommand extends Command
             $allContents
             PROMPT;
 
-
             $chatData = new ChatData(
                 messages: [
                     new MessageData(
@@ -123,36 +119,22 @@ class SummarizeWeeklyCommand extends Command
                 model: 'deepseek/deepseek-chat-v3-0324:free',
             );
 
-            // $chatResponse = LaravelOpenRouter::chatRequest($chatData);
-
-            // $response = LaravelOpenRouter::chatRequest($chatData);
-            // Log::debug('[SummarizeWeeklyCommand] Isi response LLM:', [
-            //     'type' => gettype($chatResponse),
-            //     'class' => is_object($chatResponse) ? get_class($chatResponse) : null,
-            //     'response' => $chatResponse,
-            //     'json' => json_encode($chatResponse),
-            // ]);
-
             $chatResponse = LaravelOpenRouter::chatRequest($chatData);
             dump($chatResponse);
 
-            if ($chatResponse instanceof \MoeMizrak\LaravelOpenrouter\DTO\ErrorData) {
+            if ($chatResponse instanceof ErrorData) {
                 Log::error('OpenRouter error', [
                     'code' => $chatResponse->code,
                     'message' => $chatResponse->message,
                 ]);
                 return;
             }
-            // dump($chatResponse);
 
-            // Ambil konten ringkasan via properti objek
-            // $content = $chatResponse->choices[0]->message->content ?? null;
-            // Ambil string content dari array choices
             $content = $chatResponse->choices[0]['message']['content'] ?? null;
             dump($content);
+
             if (!$content) {
                 Log::error('ResponseData tidak mengandung konten.');
-                // Simpan ke database
                 NewsSummaries::updateOrCreate(
                     ['period_type' => 'weekly', 'start_date' => $startDate],
                     [
@@ -165,8 +147,6 @@ class SummarizeWeeklyCommand extends Command
                 return;
             } else {
                 Log::info('Ringkasan berhasil diterima.', ['content' => substr($content, 0, 100)]);
-
-                // Simpan ke database
                 NewsSummaries::updateOrCreate(
                     ['period_type' => 'weekly', 'start_date' => $startDate],
                     [
@@ -177,9 +157,7 @@ class SummarizeWeeklyCommand extends Command
                     ]
                 );
                 $this->info('Ringkasan berhasil disimpan.');
-
             }
-
         } catch (Throwable $e) {
             Log::error('[SummarizeWeeklyCommand] Terjadi error: ' . $e->getMessage(), [
                 'file' => $e->getFile(),
@@ -200,7 +178,36 @@ class SummarizeWeeklyCommand extends Command
         }
     }
 
+
     // Tambahkan method baru di dalam class
+    protected function fetchMediaCenterNews(Carbon $startDate, Carbon $endDate, int $limit = 5)
+    {
+        try {
+            $response = Http::withoutVerifying()->get('https://mediacenter.serdangbedagaikab.go.id/wp-json/wp/v2/posts', [
+                'after' => $startDate->toIso8601String(),
+                'before' => $endDate->toIso8601String(),
+                'per_page' => $limit,
+                'orderby' => 'date',
+                'order' => 'desc',
+                '_fields' => 'id,title,content',
+            ]);
+
+            if (!$response->ok()) {
+                Log::warning('[fetchMediaCenterNews] Gagal mengambil data media center.');
+                return collect();
+            }
+
+            return collect($response->json())->map(function ($post) {
+                return [
+                    'title' => html_entity_decode($post['title']['rendered']),
+                    'content' => strip_tags($post['content']['rendered']),
+                ];
+            });
+        } catch (\Throwable $e) {
+            Log::error('[fetchMediaCenterNews] Error: ' . $e->getMessage());
+            return collect();
+        }
+    }
 
 
 }

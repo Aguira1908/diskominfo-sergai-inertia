@@ -1,15 +1,21 @@
 import { Link } from "@inertiajs/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, CircleX, Menu, Info } from "lucide-react";
 import axios from "axios";
 import Logo from "/public/images/diskominfosergei.avif";
+import { usePage } from "@inertiajs/react";
 
 const Header = () => {
+    const { url } = usePage();
+    const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
     const [menu, setMenu] = useState();
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenHam, setIsOpenHam] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [activeMenu, setActiveMenu] = useState(null);
+    const [whoActive, setWhoActive] = useState(null);
+    const firstSlug = url.split("/")[1];
 
     useEffect(() => {
         setIsVisible(true);
@@ -28,6 +34,53 @@ const Header = () => {
 
         fetchMenu();
     }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)
+            ) {
+                setActiveMenu(null);
+            }
+        };
+
+        if (activeMenu) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        // Cleanup saat komponen dibongkar atau activeMenu berubah
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [activeMenu]);
+
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //         setTimeout(() => {
+    //             if (
+    //                 dropdownRef.current &&
+    //                 !dropdownRef.current.contains(event.target) &&
+    //                 buttonRef.current &&
+    //                 !buttonRef.current.contains(event.target)
+    //             ) {
+    //                 setActiveMenu(null);
+    //             }
+    //         }, 10); // 10ms delay untuk beri waktu click dalam komponen
+    //     };
+
+    //     if (activeMenu) {
+    //         document.addEventListener("mousedown", handleClickOutside);
+    //     }
+
+    //     return () => {
+    //         document.removeEventListener("mousedown", handleClickOutside);
+    //     };
+    // }, [activeMenu]);
 
     return (
         <header className="pembungkus-header  flex items-center w-screen h-16 fixed top-0 z-20 bg-white sm:h-16 lg:h-20">
@@ -49,24 +102,37 @@ const Header = () => {
                                             onClick={() => {
                                                 setActiveMenu(null);
                                             }}
-                                            className="mr-auto w-8 h-8 lg:w-[38px] lg:h-[38px] xl:w-[228px] xl:h-[38px]"
+                                            className={`mr-auto w-8 py-3 px-6 h-8 lg:w-[38px] lg:h-[38px] xl:w-[228px] xl:h-[38px] rounded-2xl hover:bg-blue-100/70 transition-colors duration-400 ${
+                                                firstSlug === item.url_slug
+                                                    ? "bg-blue-100 border-2 border-blue-300 "
+                                                    : "bg-none"
+                                            }`}
                                         >
-                                            <span className=" font-[400] leading-7 text-gray-700 px-4 py-2">
+                                            <span className=" font-[400] leading-7 text-gray-700  ">
                                                 {item.title}
                                             </span>
                                         </Link>
                                     ) : (
                                         <button
-                                            onClick={() =>
-                                                setActiveMenu(
+                                            ref={buttonRef}
+                                            onClick={() => {
+                                                if (
                                                     activeMenu?.id === item.id
-                                                        ? null
-                                                        : item
-                                                )
-                                            }
-                                            className="flex items-center gap-4 cursor-pointer px-3 py-1 rounded-lg"
+                                                ) {
+                                                    setActiveMenu(null);
+                                                    setIsOpen(false);
+                                                } else {
+                                                    setActiveMenu(item);
+                                                    setIsOpen(true);
+                                                }
+                                            }}
+                                            className={`flex items-center gap-4 cursor-pointer px-5 py-2 rounded-2xl hover:bg-blue-100 transition-colors duration-400 ${
+                                                firstSlug === item.url_slug
+                                                    ? "bg-blue-100 border-2 border-blue-300 "
+                                                    : "bg-none"
+                                            }`}
                                         >
-                                            <span className=" font-[400] font-roboto leading-7 text-gray-700">
+                                            <span className=" font-[400] font-roboto leading-7 text-gray-900 ">
                                                 {item.title}
                                             </span>
                                             <ChevronDown color="#161618" />
@@ -78,6 +144,7 @@ const Header = () => {
                         {/*Drop Down Menu */}
                         {activeMenu && (
                             <section
+                                ref={dropdownRef}
                                 className={`DropDownMenu bg-white w-full absolute top-full left-0 border-t border-gray-400 overflow-auto max-h-[calc(100vh-60px)] xl:max-h-[calc(100vh-80px)] transition-all duration-300 ease-out ${
                                     isVisible
                                         ? "opacity-100 transform translate-y-0"
@@ -101,24 +168,20 @@ const Header = () => {
                                                             }}
                                                             key={index}
                                                             href={`/${activeMenu.url_slug}/${submenu.url_slug}`}
-                                                            className="flex items-start text-gray-800 group hover:bg-gray-100 p-2 rounded-xl "
+                                                            className="  flex flex-col items-start text-gray-800 group hover:bg-gray-100 p-5 rounded-xl "
                                                         >
-                                                            <Info
-                                                                className="w-[40px] p-1 text-blue-500 bg-blue-200/40 rounded-xl stroke-3 h-auto mt-1.5"
-                                                                alt="Informasi"
-                                                            />
-                                                            <div className="ml-4">
-                                                                <h2 className="group-hover:underline   text-lg leading-[23px] font-bold mb-1">
-                                                                    {
-                                                                        submenu.title
-                                                                    }
-                                                                </h2>
-                                                                <p className="text-sm opacity-80">
-                                                                    {
-                                                                        submenu.excerpt
-                                                                    }
-                                                                </p>
-                                                            </div>
+                                                            {/* <Info */}
+                                                            {/* className="w-[40px] p-1 text-blue-500 bg-blue-200/40 rounded-xl stroke-3 h-auto mt-1.5" */}
+                                                            {/* alt="Informasi" */}
+                                                            {/* /> */}
+                                                            <h2 className="group-hover:underline   text-lg leading-[23px] font-bold mb-1">
+                                                                {submenu.title}
+                                                            </h2>
+                                                            <p className="text-sm opacity-80">
+                                                                {
+                                                                    submenu.excerpt
+                                                                }
+                                                            </p>
                                                         </Link>
                                                     )
                                                 )}
