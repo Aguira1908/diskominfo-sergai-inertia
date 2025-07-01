@@ -14,10 +14,8 @@ class NewsSummarizeController extends Controller
      */
     public function index()
     {
-        $startDate = Carbon::now()->subWeek(); // 7 hari terakhir
-        $endDate = Carbon::now();
 
-        $newsSum = NewsSummaries::whereBetween('created_at', [$startDate, $endDate])->get(["id", "period_type", "start_date", "end_date", "summary"]);
+        $newsSum = NewsSummaries::where('status', 'success')->latest('created_at') ->get(["id", "period_type", "start_date", "end_date", "summary"]);
 
 
         if (!$newsSum) {
