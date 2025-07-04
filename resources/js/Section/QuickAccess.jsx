@@ -15,23 +15,31 @@ const QuickAccess = () => {
                     </p>
                 </li>
                 <li className="group p-6 rounded-xl border border-gray-200 shadow-xl shadow-gray-200  bg-gray-50 hover:bg-blue-50 transition-colors ease-in-out duration-250">
-                    <div className="flex flex-col gap-4" aria-label={`Buka `}>
-                        {/* <img
+                    <a
+                        href="https://ppid.serdangbedagaikab.go.id/"
+                        className="w-full h-full"
+                    >
+                        <div
+                            className="flex flex-col gap-4"
+                            aria-label={`Buka `}
+                        >
+                            {/* <img
                             src="https://d2s1u1uyrl4yfi.cloudfront.net/diskominfo/showcase/386c9057f88c0eb85d367ca4a0c04d1e.webp"
                             alt="gambar"
                             loading="lazy"
                             className="lazy-img w-fit h-10"
                         /> */}
 
-                        <h1 className="text-xl font-roboto font-bold group-hover:text-blue-700">
-                            PPID
-                        </h1>
-                        <p className="text-sm text-gray-600 leading-6 group-hover:text-blue-gray-800 focus:outline-none">
-                            Sampaikan permohonan informasi Anda kepada PPID
-                            untuk memperoleh data terbaru dan terpercaya dari
-                            Diskominfo Kabupaten Serdang Bedagai.
-                        </p>
-                    </div>
+                            <h1 className="text-xl font-roboto font-bold group-hover:text-blue-700">
+                                PPID
+                            </h1>
+                            <p className="text-sm text-gray-600 leading-6 group-hover:text-blue-gray-800 focus:outline-none">
+                                Sampaikan permohonan informasi Anda kepada PPID
+                                untuk memperoleh data terbaru dan terpercaya
+                                dari Diskominfo Kabupaten Serdang Bedagai.
+                            </p>
+                        </div>
+                    </a>
                 </li>
                 {/* <li className="group p-6 rounded-xl border border-gray-200 shadow-xl shadow-gray-200  bg-gray-50 hover:bg-blue-50 transition-colors ease-in-out duration-250">
                     <a
