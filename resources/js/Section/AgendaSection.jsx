@@ -90,9 +90,8 @@ const AgendaSection = () => {
                         >
                             {currentWeek.map((day, index) => {
                                 const today =
-                                    currentDate.toISOString().split("T")[0] ===
+                                    currentDate.toLocaleDateString("sv-SE") ===
                                     day.fullDate;
-
                                 return (
                                     <SwiperSlide key={index}>
                                         <div

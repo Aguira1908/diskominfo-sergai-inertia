@@ -15,7 +15,6 @@ const ArticleNewsSum = () => {
                 const response = await axios.get("/api/summarize");
                 // console.log(response);
                 const cleanData = SanitizeData(response?.data || []);
-                console.log(cleanData);
                 setNewsSUm(cleanData);
             } catch (err) {
                 console.log("Failed to fetch Summarize", err);

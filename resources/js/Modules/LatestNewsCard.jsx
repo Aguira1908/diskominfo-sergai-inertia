@@ -24,8 +24,8 @@ const LatestNewsCard = () => {
                                         {News.title}
                                     </h2>
                                     <div className="flex justify-between items-center">
-                                        <h3 className="text-xs">
-                                            <span>
+                                        <h3 className="text-xs line-clamp-2">
+                                            <span className="">
                                                 {Array.isArray(News.category)
                                                     ? News.category.length > 0
                                                         ? News.category
