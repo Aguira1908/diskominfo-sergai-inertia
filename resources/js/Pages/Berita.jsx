@@ -147,7 +147,7 @@ const Berita = () => {
                                 </div>
                             </div>
                             {/* Card News */}
-                            <div className=" w-[90%] h-[518px] grid grid-cols-1 grid-rows-[38px_1fr] gap-4">
+                            <div className="w-full xl:w-[90%] relative h-full xl:h-[518px] grid grid-cols-1 grid-rows-[38px_1fr] gap-4">
                                 <div
                                     className="flex items-center border-b-4 border-blue-400 py-2  "
                                     aria-hidden="true"

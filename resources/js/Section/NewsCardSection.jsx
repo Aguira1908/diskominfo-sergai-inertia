@@ -66,7 +66,7 @@ const NewsCardSection = () => {
                                         <div className="flex flex-col h-full">
                                             <div className="flex-grow flex flex-col h-auto justify-between">
                                                 <div>
-                                                    <p className="font-roboto text-sm  uppercase leading-relaxed tracking-wider opacity-80 mb-1">
+                                                    <p className="font-roboto text-sm line-clamp-2 uppercase leading-relaxed tracking-wider opacity-80 mb-1">
                                                         {Array.isArray(
                                                             News.category
                                                         )

@@ -1,7 +1,6 @@
 import React from "react";
 
 const ModalFeaturedProgram = ({ program, onClose, isOpen }) => {
-    console.log(program);
     return ReactDOM.createPortal(
         // <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-filter backdrop-blur-sm ">
         //     <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
