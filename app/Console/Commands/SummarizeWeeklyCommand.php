@@ -40,17 +40,26 @@ class SummarizeWeeklyCommand extends Command
             $periodType = 'weekly';
             $startDate = $this->option('start')
                 ? Carbon::parse($this->option('start'))
-                : Carbon::now()->subWeek()->startOfWeek();
+                : Carbon::now()->copy()->subWeek()->addDay();
+            ;
 
+            // $endDate = $this->option('end')
+            //     ? Carbon::parse($this->option('end'))
+            //     : Carbon::now()->subWeek()->endOfWeek();
             $endDate = $this->option('end')
                 ? Carbon::parse($this->option('end'))
-                : Carbon::now()->subWeek()->endOfWeek();
+                : Carbon::now();
 
             $localContents = News::where('is_active', true)
                 ->whereNotNull('published_at')
                 ->whereBetween('published_at', [$startDate, $endDate])
                 ->take(5)
                 ->get(['title', 'content']);
+
+            Log::info('Mengambil berita berdasarkan rentang tanggal', [
+                'start' => $startDate,
+                'end' => $endDate,
+            ]);
 
             $mediaCenterContents = $this->fetchMediaCenterNews($startDate, $endDate, 5);
 
